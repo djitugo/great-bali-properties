@@ -132,7 +132,7 @@ export default function Navbar() {
             <div style={{ position: 'relative', marginLeft: '8px' }}>
               <button onClick={() => { setOpenLang(!openLang); setOpenCurrency(false) }}
                 style={{ padding: '6px 10px', fontSize: '13px', color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {lang === 'en' ? '🇬🇧 EN' : '🇮🇩 ID'} <span style={{ fontSize: '8px' }}>▾</span>
+                {lang === 'EN' ? 'EN' : 'ID'} <span style={{ fontSize: '8px' }}>▾</span>
               </button>
               {openLang && (
                 <div style={drop}>
@@ -146,7 +146,7 @@ export default function Navbar() {
             <div style={{ position: 'relative', marginLeft: '4px' }}>
               <button onClick={() => { setOpenCurrency(!openCurrency); setOpenLang(false) }}
                 style={{ padding: '6px 10px', fontSize: '13px', color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {currency === 'IDR' ? '🇮🇩 IDR' : '🇺🇸 USD'} <span style={{ fontSize: '8px' }}>▾</span>
+                {currency === 'IDR' ? 'IDR' : 'USD'} <span style={{ fontSize: '8px' }}>▾</span>
               </button>
               {openCurrency && (
                 <div style={drop}>

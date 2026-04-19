@@ -25,17 +25,17 @@ export default async function Home({ searchParams }) {
   const { data: properties } = await query
 
   return (
-    <main style={{ fontFamily: 'Inter, sans-serif', backgroundColor: 'white', color: 'black' }}>
+    <main style={{ fontFamily: 'Inter, sans-serif', backgroundColor: 'white', color: 'black', overflowX: 'hidden' }}>
 
       <HeroSlider />
 
       {/* WHY US */}
-      <div style={{ padding: '96px 48px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)', maxWidth: '1100px', margin: '0 auto' }}>
         <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Why Choose Us</p>
-        <h2 style={{ fontSize: '36px', fontWeight: 300, marginBottom: '48px', lineHeight: 1.2 }}>
+        <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '40px', lineHeight: 1.2 }}>
           The smart way to invest<br /><strong>in Bali real estate</strong>
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '32px' }}>
           {[
             { title: 'Curated Listings', desc: 'Every property is hand-selected and verified by our local team. No fake listings, no hidden surprises.' },
             { title: 'Legal Assistance', desc: 'We guide you through Indonesian property law, leasehold & freehold structures, and notary processes.' },
@@ -50,33 +50,33 @@ export default async function Home({ searchParams }) {
       </div>
 
       {/* LISTINGS */}
-      <div id="listings" style={{ borderTop: '1px solid #f3f4f6', padding: '80px 48px' }}>
+      <div id="listings" style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Properties</p>
-          <h2 style={{ fontSize: '36px', fontWeight: 300, marginBottom: '40px' }}>Available <strong>Listings</strong></h2>
+          <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '32px' }}>Available <strong>Listings</strong></h2>
           <AdvancedSearch />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginTop: '32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', marginTop: '24px' }}>
             {properties?.map(p => <PropertyCard key={p.slug} property={p} />)}
             {(!properties || properties.length === 0) && (
-              <p style={{ gridColumn: 'span 3', textAlign: 'center', color: '#d1d5db', padding: '80px 0', fontSize: '14px' }}>No properties found.</p>
+              <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#d1d5db', padding: '60px 0', fontSize: '14px' }}>No properties found.</p>
             )}
           </div>
         </div>
       </div>
 
       {/* LOCATIONS */}
-      <div style={{ borderTop: '1px solid #f3f4f6', padding: '80px 48px', backgroundColor: '#f9fafb' }}>
+      <div style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)', backgroundColor: '#f9fafb' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Areas We Cover</p>
-          <h2 style={{ fontSize: '36px', fontWeight: 300, marginBottom: '40px' }}>Popular <strong>Locations</strong></h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+          <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '32px' }}>Popular <strong>Locations</strong></h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '12px' }}>
             {['Canggu', 'Seminyak', 'Ubud', 'Jimbaran', 'Uluwatu', 'Sanur', 'Pererenan', 'Kerobokan'].map(loc => (
               <a key={loc} href={'/?location=' + loc} style={{
-                backgroundColor: 'white', border: '1px solid #f3f4f6', padding: '20px 16px',
+                backgroundColor: 'white', border: '1px solid #e5e7eb', padding: '16px 14px',
                 textDecoration: 'none', color: 'black', display: 'block'
               }}>
-                <p style={{ fontWeight: 500, fontSize: '14px' }}>{loc}</p>
-                <p style={{ fontSize: '12px', color: '#9ca3af', marginTop: '4px' }}>Bali, Indonesia</p>
+                <p style={{ fontWeight: 500, fontSize: '13px' }}>{loc}</p>
+                <p style={{ fontSize: '11px', color: '#9ca3af', marginTop: '3px' }}>Bali</p>
               </a>
             ))}
           </div>
@@ -84,25 +84,25 @@ export default async function Home({ searchParams }) {
       </div>
 
       {/* CTA */}
-      <div style={{ padding: '96px 48px', textAlign: 'center' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)', textAlign: 'center' }}>
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Get In Touch</p>
-          <h2 style={{ fontSize: '40px', fontWeight: 300, marginBottom: '16px', lineHeight: 1.2 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 5vw, 40px)', fontWeight: 300, marginBottom: '16px', lineHeight: 1.2 }}>
             Ready to find your<br /><strong>perfect villa?</strong>
           </h2>
           <p style={{ color: '#6b7280', fontSize: '14px', marginBottom: '32px', lineHeight: 1.7 }}>
             Our local team is ready to help. Reach out on WhatsApp for a free consultation.
           </p>
           <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-            style={{ display: 'inline-block', backgroundColor: 'black', color: 'white', fontSize: '14px', padding: '14px 40px', textDecoration: 'none', fontWeight: 500 }}>
+            style={{ display: 'inline-block', backgroundColor: 'black', color: 'white', fontSize: '14px', padding: '14px 36px', textDecoration: 'none', fontWeight: 500 }}>
             Start on WhatsApp
           </a>
         </div>
       </div>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: '1px solid #f3f4f6', padding: '48px', backgroundColor: 'white' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
+      <footer style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(32px, 5vw, 48px) clamp(20px, 5vw, 48px)', backgroundColor: 'white' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
           <div>
             <p style={{ fontWeight: 700, marginBottom: '8px', fontSize: '15px' }}>Great Bali Properties</p>
             <p style={{ fontSize: '13px', color: '#9ca3af', lineHeight: 1.7 }}>Premium villa and land listings across Bali. A proud partner of Great Bali Villas.</p>
@@ -118,7 +118,7 @@ export default async function Home({ searchParams }) {
             <p style={{ fontSize: '13px', color: '#6b7280' }}>info@greatbaliproperties.com</p>
           </div>
         </div>
-        <div style={{ borderTop: '1px solid #f3f4f6', marginTop: '40px', paddingTop: '24px', textAlign: 'center' }}>
+        <div style={{ borderTop: '1px solid #f3f4f6', marginTop: '32px', paddingTop: '20px', textAlign: 'center' }}>
           <p style={{ fontSize: '12px', color: '#d1d5db' }}>© 2025 Great Bali Properties. All rights reserved.</p>
         </div>
       </footer>
