@@ -1,6 +1,6 @@
 import { supabase } from './lib/supabase'
 import PropertyCard from './components/PropertyCard'
-import FilterBar from './components/FilterBar'
+import AdvancedSearch from './components/AdvancedSearch'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 
@@ -9,11 +9,19 @@ export default async function Home({ searchParams }) {
   const location = params?.location || ''
   const type = params?.type || ''
   const status = params?.status || ''
+  const minPrice = params?.minPrice || ''
+  const maxPrice = params?.maxPrice || ''
+  const bedrooms = params?.bedrooms || ''
+  const priceTypeParam = params?.price_type || ''
 
   let query = supabase.from('properties').select('*').order('featured', { ascending: false })
   if (location) query = query.eq('location', location)
   if (type) query = query.eq('property_type', type)
   if (status) query = query.eq('status', status)
+  if (minPrice) query = query.gte('price', minPrice)
+  if (maxPrice) query = query.lte('price', maxPrice)
+  if (bedrooms) query = query.gte('bedrooms', bedrooms)
+  if (priceTypeParam) query = query.eq('price_type', priceTypeParam)
 
   const { data: properties } = await query
 
@@ -48,7 +56,7 @@ export default async function Home({ searchParams }) {
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Properties</p>
           <h2 style={{ fontSize: '36px', fontWeight: 300, marginBottom: '40px' }}>Available <strong>Listings</strong></h2>
-          <FilterBar />
+          <AdvancedSearch />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginTop: '32px' }}>
             {properties?.map(p => <PropertyCard key={p.slug} property={p} />)}
             {(!properties || properties.length === 0) && (
@@ -67,8 +75,7 @@ export default async function Home({ searchParams }) {
             {['Canggu', 'Seminyak', 'Ubud', 'Jimbaran', 'Uluwatu', 'Sanur', 'Pererenan', 'Kerobokan'].map(loc => (
               <a key={loc} href={'/?location=' + loc} style={{
                 backgroundColor: 'white', border: '1px solid #f3f4f6', padding: '20px 16px',
-                textDecoration: 'none', color: 'black', display: 'block',
-                transition: 'border-color 0.2s'
+                textDecoration: 'none', color: 'black', display: 'block'
               }}>
                 <p style={{ fontWeight: 500, fontSize: '14px' }}>{loc}</p>
                 <p style={{ fontSize: '12px', color: '#9ca3af', marginTop: '4px' }}>Bali, Indonesia</p>

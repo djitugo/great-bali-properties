@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import TranslateWidget from './TranslateWidget'
 
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(null)
@@ -101,7 +102,7 @@ export default function Navbar() {
           ))}
 
           {/* Currency & Translate placeholders */}
-          <button style={{ ...menuBtn, color: '#6b7280' }}>🌐 EN</button>
+         <TranslateWidget />
           <button style={{ ...menuBtn, color: '#6b7280' }}>💱 IDR</button>
 
           {/* CTA */}
