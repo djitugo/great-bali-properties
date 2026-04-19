@@ -1,8 +1,7 @@
 import { supabase } from './lib/supabase'
 import PropertyCard from './components/PropertyCard'
 import AdvancedSearch from './components/AdvancedSearch'
-import Navbar from './components/Navbar'
-import HeroSection from './components/HeroSection'
+import HeroSlider from './components/HeroSlider'
 
 export default async function Home({ searchParams }) {
   const params = await searchParams
@@ -28,8 +27,7 @@ export default async function Home({ searchParams }) {
   return (
     <main style={{ fontFamily: 'Inter, sans-serif', backgroundColor: 'white', color: 'black' }}>
 
-      <Navbar />
-      <HeroSection />
+      <HeroSlider />
 
       {/* WHY US */}
       <div style={{ padding: '96px 48px', maxWidth: '1100px', margin: '0 auto' }}>
@@ -76,7 +74,9 @@ export default async function Home({ searchParams }) {
               <a key={loc} href={'/?location=' + loc} style={{
                 backgroundColor: 'white', border: '1px solid #f3f4f6', padding: '20px 16px',
                 textDecoration: 'none', color: 'black', display: 'block'
-              }}>
+              }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = '#374151'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = '#f3f4f6'}>
                 <p style={{ fontWeight: 500, fontSize: '14px' }}>{loc}</p>
                 <p style={{ fontSize: '12px', color: '#9ca3af', marginTop: '4px' }}>Bali, Indonesia</p>
               </a>
