@@ -1,112 +1,112 @@
 'use client'
-import { useState, useEffect } from 'react'
-
-const menuItems = [
-  {
-    label: 'Properties',
-    dropdown: [
-      { label: 'All Listings', href: '/#listings' },
-      { label: 'Villas for Sale', href: '/?type=villa&status=for_sale' },
-      { label: 'Land for Sale', href: '/?type=land&status=for_sale' },
-      { label: 'Villas for Rent', href: '/?type=villa&status=for_rent' },
-      { label: 'Commercial', href: '/?type=commercial' },
-    ]
-  },
-  {
-    label: 'Locations',
-    dropdown: [
-      { label: 'Canggu', href: '/?location=Canggu' },
-      { label: 'Seminyak', href: '/?location=Seminyak' },
-      { label: 'Ubud', href: '/?location=Ubud' },
-      { label: 'Jimbaran', href: '/?location=Jimbaran' },
-      { label: 'Uluwatu', href: '/?location=Uluwatu' },
-      { label: 'Sanur', href: '/?location=Sanur' },
-    ]
-  },
-  {
-    label: 'Investment',
-    dropdown: [
-      { label: 'Why Invest in Bali', href: '/invest' },
-      { label: 'Leasehold vs Freehold', href: '/invest#leasehold' },
-      { label: 'ROI & Yields', href: '/invest#roi' },
-      { label: 'Legal Guide', href: '/invest#legal' },
-    ]
-  },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-]
+import { useState } from 'react'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [openMenu, setOpenMenu] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const nav = {
+    position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
+    backgroundColor: 'white', borderBottom: '1px solid #e5e7eb',
+    fontFamily: 'Inter, sans-serif'
+  }
+  const container = {
+    maxWidth: '1280px', margin: '0 auto', padding: '0 24px',
+    height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'
+  }
+  const logo = { fontWeight: 700, fontSize: '16px', color: 'black', textDecoration: 'none' }
+  const menuWrap = { display: 'flex', alignItems: 'center', gap: '4px' }
+  const menuBtn = {
+    background: 'none', border: 'none', cursor: 'pointer',
+    padding: '8px 12px', fontSize: '13px', color: '#374151',
+    display: 'flex', alignItems: 'center', gap: '4px', borderRadius: '4px'
+  }
+  const dropdown = {
+    position: 'absolute', top: '100%', left: 0, minWidth: '200px',
+    backgroundColor: 'white', border: '1px solid #e5e7eb',
+    boxShadow: '0 8px 24px rgba(0,0,0,0.1)', zIndex: 9999, paddingTop: '4px', paddingBottom: '4px'
+  }
+  const dropItem = {
+    display: 'block', padding: '10px 16px', fontSize: '13px',
+    color: '#374151', textDecoration: 'none', whiteSpace: 'nowrap'
+  }
+  const ctaBtn = {
+    backgroundColor: 'black', color: 'white', padding: '8px 16px',
+    fontSize: '13px', fontWeight: 500, textDecoration: 'none', marginLeft: '8px'
+  }
+
+  const menus = [
+    { id: 'home', label: 'Home', href: '/' },
+    {
+      id: 'properties', label: 'Properties ▾',
+      items: [
+        { label: 'All Listings', href: '/#listings' },
+        { label: 'Villas for Sale', href: '/?type=villa&status=for_sale' },
+        { label: 'Land for Sale', href: '/?type=land&status=for_sale' },
+        { label: 'Villas for Rent', href: '/?type=villa&status=for_rent' },
+        { label: 'Commercial', href: '/?type=commercial' },
+      ]
+    },
+    { id: 'about', label: 'About', href: '/about' },
+    {
+      id: 'guide', label: 'Bali Guide ▾',
+      items: [
+        { label: 'Why Invest in Bali', href: '/guide/invest' },
+        { label: 'Best Areas to Buy', href: '/guide/areas' },
+        { label: 'Leasehold vs Freehold', href: '/guide/ownership' },
+        { label: 'Legal Process', href: '/guide/legal' },
+        { label: 'Rental Yields & ROI', href: '/guide/roi' },
+      ]
+    },
+    {
+      id: 'featured', label: 'Featured ▾',
+      items: [
+        { label: 'Featured Villas', href: '/?featured=true' },
+        { label: 'New Listings', href: '/?sort=new' },
+        { label: 'Price Reduced', href: '/?sort=reduced' },
+      ]
+    },
+    { id: 'contact', label: 'Contact', href: '/contact' },
+  ]
 
   return (
-    <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-      backgroundColor: 'white',
-      borderBottom: '1px solid #f3f4f6',
-      boxShadow: scrolled ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
-      transition: 'box-shadow 0.3s'
-    }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-
+    <nav style={nav}>
+      <div style={container}>
         {/* Logo */}
-        <a href="/" style={{ textDecoration: 'none', color: 'black' }}>
-          <div style={{ fontWeight: 600, fontSize: '15px', letterSpacing: '-0.3px' }}>Great Bali Properties</div>
-          <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '1px' }}>by Great Bali Villas</div>
-        </a>
+        <a href="/" style={logo}>Great Bali Properties</a>
 
         {/* Desktop Menu */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
-          {menuItems.map(item => (
-            <div key={item.label} style={{ position: 'relative' }}
-              onMouseEnter={() => setOpenMenu(item.label)}
+        <div style={menuWrap}>
+          {menus.map(m => (
+            <div key={m.id} style={{ position: 'relative' }}
+              onMouseEnter={() => setOpenMenu(m.id)}
               onMouseLeave={() => setOpenMenu(null)}>
-              {item.href ? (
-                <a href={item.href} style={{ fontSize: '13px', color: '#4b5563', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  {item.label}
-                </a>
+              {m.href ? (
+                <a href={m.href} style={menuBtn}>{m.label}</a>
               ) : (
-                <button style={{ fontSize: '13px', color: '#4b5563', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', padding: 0 }}>
-                  {item.label}
-                  <svg style={{ width: '10px', height: '10px', transform: openMenu === item.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+                <button style={menuBtn}>{m.label}</button>
               )}
-
-              {/* Dropdown */}
-              {item.dropdown && openMenu === item.label && (
-                <div style={{
-                  position: 'absolute', top: '100%', left: 0, paddingTop: '8px', width: '200px', zIndex: 100
-                }}>
-                  <div style={{ background: 'white', border: '1px solid #f3f4f6', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', padding: '8px 0' }}>
-                    {item.dropdown.map(sub => (
-                      <a key={sub.label} href={sub.href} style={{
-                        display: 'block', padding: '10px 16px', fontSize: '13px', color: '#4b5563', textDecoration: 'none'
-                      }}
-                        onMouseEnter={e => e.target.style.backgroundColor = '#f9fafb'}
-                        onMouseLeave={e => e.target.style.backgroundColor = 'transparent'}>
-                        {sub.label}
-                      </a>
-                    ))}
-                  </div>
+              {m.items && openMenu === m.id && (
+                <div style={dropdown}>
+                  {m.items.map(item => (
+                    <a key={item.label} href={item.href} style={dropItem}
+                      onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f9fafb'}
+                      onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                      {item.label}
+                    </a>
+                  ))}
                 </div>
               )}
             </div>
           ))}
 
+          {/* Currency & Translate placeholders */}
+          <button style={{ ...menuBtn, color: '#6b7280' }}>🌐 EN</button>
+          <button style={{ ...menuBtn, color: '#6b7280' }}>💱 IDR</button>
+
           {/* CTA */}
-          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-            style={{ fontSize: '13px', backgroundColor: 'black', color: 'white', padding: '8px 18px', textDecoration: 'none', fontWeight: 500 }}>
-            WhatsApp Us
+          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" style={ctaBtn}>
+            WhatsApp
           </a>
         </div>
       </div>
