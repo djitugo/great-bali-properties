@@ -1,54 +1,58 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { useLang, useT } from '../lib/i18n'
 
-const menus = [
-  { id: 'home', label: 'Home', href: '/' },
-  {
-    id: 'properties', label: 'Properties',
-    items: [
-      { label: 'All Properties', href: '/properties' },
-      { label: 'Villas for Sale', href: '/properties?type=villa&status=for_sale' },
-      { label: 'Land for Sale', href: '/properties?type=land&status=for_sale' },
-      { label: 'Villas for Rent', href: '/properties?type=villa&status=for_rent' },
-      { label: 'Featured Properties', href: '/properties?featured=true' },
-    ]
-  },
-  { id: 'about', label: 'About', href: '/about' },
-  {
-    id: 'guide', label: 'Bali Guide',
-    items: [
-      { label: 'Why Invest in Bali', href: '/guide/invest' },
-      { label: 'Best Areas to Buy', href: '/guide/areas' },
-      { label: 'Leasehold vs Freehold', href: '/guide/ownership' },
-      { label: 'Legal Process', href: '/guide/legal' },
-      { label: 'Rental Yields & ROI', href: '/guide/roi' },
-    ]
-  },
-  {
-    id: 'featured', label: 'Featured',
-    items: [
-      { label: 'Featured Villas', href: '/properties?featured=true' },
-      { label: 'New Listings', href: '/properties?sort=new' },
-    ]
-  },
-  { id: 'contact', label: 'Contact', href: '/contact' },
-]
+function buildMenus(t) {
+  return [
+    { id: 'home', label: t('Home'), href: '/' },
+    {
+      id: 'properties', label: t('Properties'),
+      items: [
+        { label: t('All Properties'), href: '/properties' },
+        { label: t('Villas for Sale'), href: '/properties?type=villa&status=for_sale' },
+        { label: t('Land for Sale'), href: '/properties?type=land&status=for_sale' },
+        { label: t('Villas for Rent'), href: '/properties?type=villa&status=for_rent' },
+        { label: t('Featured Properties'), href: '/properties?featured=true' },
+      ]
+    },
+    { id: 'about', label: t('About'), href: '/about' },
+    {
+      id: 'guide', label: t('Bali Guide'),
+      items: [
+        { label: t('Why Invest in Bali'), href: '/guide' },
+        { label: t('Best Areas to Buy'), href: '/guide/areas' },
+        { label: t('Leasehold vs Freehold'), href: '/guide/ownership' },
+        { label: t('Legal Process'), href: '/guide/legal' },
+        { label: t('Rental Yields & ROI'), href: '/guide/roi' },
+      ]
+    },
+    {
+      id: 'featured', label: t('Featured'),
+      items: [
+        { label: t('Featured Villas'), href: '/properties?featured=true' },
+        { label: t('New Listings'), href: '/properties?sort=new' },
+      ]
+    },
+    { id: 'contact', label: t('Contact'), href: '/contact' },
+  ]
+}
 
 export default function Navbar() {
+  const { lang, setLang } = useLang()
+  const t = useT()
   const [openMenu, setOpenMenu] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [currency, setCurrency] = useState('IDR')
-  const [lang, setLang] = useState('en')
   const [scrolled, setScrolled] = useState(false)
   const [openCurrency, setOpenCurrency] = useState(false)
   const [openLang, setOpenLang] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
-    const saved = localStorage.getItem('gbp_currency')
-    if (saved) setCurrency(saved)
-    const savedLang = localStorage.getItem('gbp_lang')
-    if (savedLang) setLang(savedLang)
+    try {
+      const saved = localStorage.getItem('gbp_currency')
+      if (saved) setCurrency(saved)
+    } catch {}
     const handleScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -56,21 +60,23 @@ export default function Navbar() {
 
   const handleCurrency = (code) => {
     setCurrency(code)
-    localStorage.setItem('gbp_currency', code)
+    try { localStorage.setItem('gbp_currency', code) } catch {}
     setOpenCurrency(false)
     window.dispatchEvent(new CustomEvent('currencyChange', { detail: code }))
   }
 
+  // #6 — Manual translate, tanpa Google Translate redirect. Cukup ubah state.
   const handleLang = (code) => {
     setLang(code)
-    localStorage.setItem('gbp_lang', code)
     setOpenLang(false)
-    if (code === 'id') {
-      window.location.href = 'https://translate.google.com/translate?sl=en&tl=id&u=' + encodeURIComponent('https://greatbaliproperties.com')
-    } else {
-      window.location.href = 'https://greatbaliproperties.com'
-    }
+    setMobileOpen(false)
+    // Update <html lang> supaya screen reader & SEO konsisten
+    try { document.documentElement.lang = code === 'id' ? 'id' : 'en' } catch {}
   }
+
+  useEffect(() => {
+    try { document.documentElement.lang = lang === 'id' ? 'id' : 'en' } catch {}
+  }, [lang])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -78,6 +84,8 @@ export default function Navbar() {
       window.location.href = '/properties?q=' + encodeURIComponent(searchQuery.trim())
     }
   }
+
+  const menus = buildMenus(t)
 
   const drop = {
     position: 'absolute', top: '110%', right: 0, backgroundColor: 'white',
@@ -95,6 +103,9 @@ export default function Navbar() {
     zIndex: 9999, minWidth: '200px', padding: '4px 0'
   }
 
+  // #5 — Tampilkan bahasa yang aktif sekarang (bukan yang bisa dipilih)
+  const currentLangLabel = lang === 'id' ? 'ID' : 'EN'
+
   return (
     <>
       <nav style={{
@@ -105,22 +116,22 @@ export default function Navbar() {
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '16px' }}>
 
-          {/* #3 — translate="no" supaya site title tidak ikut translate */}
+          {/* Site title — tidak pernah diterjemahkan */}
           <a href="/" translate="no" style={{ textDecoration: 'none', color: 'black', flexShrink: 0 }}>
-            <div style={{ fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>Great Bali Properties</div>
-            <div style={{ fontSize: '10px', color: '#9ca3af' }}>by Great Bali Villas</div>
+            <div translate="no" style={{ fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>Great Bali Properties</div>
+            <div translate="no" style={{ fontSize: '10px', color: '#9ca3af' }}>by Great Bali Villas</div>
           </a>
 
-          {/* #1 — Search box inline di header, minimalist */}
+          {/* Search */}
           <form onSubmit={handleSearch} className="gbp-desktop" style={{ flex: 1, maxWidth: '280px', display: 'flex', alignItems: 'center', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
             <input
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search properties..."
+              placeholder={t('Search properties...')}
               style={{ flex: 1, border: 'none', padding: '8px 12px', fontSize: '13px', outline: 'none', backgroundColor: 'transparent', color: '#374151' }}
             />
-            <button type="submit" style={{ background: 'none', border: 'none', padding: '8px 10px', cursor: 'pointer', color: '#9ca3af', display: 'flex', alignItems: 'center' }}>
+            <button type="submit" aria-label="Search" style={{ background: 'none', border: 'none', padding: '8px 10px', cursor: 'pointer', color: '#9ca3af', display: 'flex', alignItems: 'center' }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
           </form>
@@ -155,16 +166,17 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* Language */}
+            {/* Language — tombol menampilkan bahasa yang SEDANG AKTIF */}
             <div style={{ position: 'relative', marginLeft: '4px' }}>
               <button onClick={() => { setOpenLang(!openLang); setOpenCurrency(false) }}
+                aria-label="Switch language"
                 style={{ padding: '6px 10px', fontSize: '13px', fontWeight: 500, color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {lang === 'en' ? 'EN' : 'ID'} <span style={{ fontSize: '8px' }}>▾</span>
+                {currentLangLabel} <span style={{ fontSize: '8px' }}>▾</span>
               </button>
               {openLang && (
                 <div style={drop}>
-                  <button onClick={() => handleLang('en')} style={{ ...dropBtn, fontWeight: lang === 'en' ? 700 : 400 }}>EN — English</button>
-                  <button onClick={() => handleLang('id')} style={{ ...dropBtn, fontWeight: lang === 'id' ? 700 : 400 }}>ID — Bahasa</button>
+                  <button onClick={() => handleLang('en')} style={{ ...dropBtn, fontWeight: lang === 'en' ? 700 : 400, backgroundColor: lang === 'en' ? '#f9fafb' : 'transparent' }}>EN — English</button>
+                  <button onClick={() => handleLang('id')} style={{ ...dropBtn, fontWeight: lang === 'id' ? 700 : 400, backgroundColor: lang === 'id' ? '#f9fafb' : 'transparent' }}>ID — Bahasa</button>
                 </div>
               )}
             </div>
@@ -172,6 +184,7 @@ export default function Navbar() {
             {/* Currency */}
             <div style={{ position: 'relative', marginLeft: '4px' }}>
               <button onClick={() => { setOpenCurrency(!openCurrency); setOpenLang(false) }}
+                aria-label="Switch currency"
                 style={{ padding: '6px 10px', fontSize: '13px', fontWeight: 500, color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 {currency} <span style={{ fontSize: '8px' }}>▾</span>
               </button>
@@ -186,12 +199,13 @@ export default function Navbar() {
             {/* WhatsApp */}
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
               style={{ marginLeft: '8px', backgroundColor: 'black', color: 'white', padding: '8px 16px', fontSize: '13px', fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>
-              WhatsApp
+              {t('WhatsApp')}
             </a>
           </div>
 
           {/* Hamburger */}
           <button onClick={() => setMobileOpen(!mobileOpen)} className="gbp-mobile"
+            aria-label="Menu"
             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', marginLeft: 'auto' }}>
             <div style={{ width: '22px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <span style={{ display: 'block', height: '2px', backgroundColor: 'black', transition: 'all 0.3s', transform: mobileOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
@@ -204,16 +218,15 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {mobileOpen && (
           <div style={{ backgroundColor: 'white', borderTop: '1px solid #f3f4f6', padding: '16px 24px 32px', maxHeight: '85vh', overflowY: 'auto' }}>
-            {/* Mobile Search */}
             <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', marginBottom: '20px' }}>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search properties..."
+                placeholder={t('Search properties...')}
                 style={{ flex: 1, border: '1px solid #e5e7eb', padding: '10px 12px', fontSize: '14px', outline: 'none' }}
               />
-              <button type="submit"
+              <button type="submit" aria-label="Search"
                 style={{ backgroundColor: 'black', color: 'white', padding: '10px 14px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               </button>
@@ -249,14 +262,15 @@ export default function Navbar() {
             </div>
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', backgroundColor: 'black', color: 'white', textAlign: 'center', padding: '13px', fontSize: '14px', textDecoration: 'none', marginTop: '16px', fontWeight: 600 }}>
-              WhatsApp Us
+              {t('WhatsApp Us')}
             </a>
           </div>
         )}
       </nav>
 
-      {/* #4 — Floating WhatsApp hitam dengan SVG icon */}
+      {/* Floating WhatsApp */}
       <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+        aria-label="WhatsApp"
         style={{
           position: 'fixed', bottom: '24px', right: '24px', zIndex: 9998,
           backgroundColor: 'black', color: 'white', width: '52px', height: '52px',
