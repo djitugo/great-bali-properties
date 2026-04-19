@@ -17,6 +17,7 @@ const USD_RATE = 0.000062
 export default function PropertiesMap({ properties }) {
   const mapRef = useRef(null)
   const mapInstance = useRef(null)
+  const markersRef = useRef([])
   const [currency, setCurrency] = useState('IDR')
   const [selected, setSelected] = useState(null)
   const [mapLoaded, setMapLoaded] = useState(false)
@@ -45,13 +46,11 @@ export default function PropertiesMap({ properties }) {
 
     const loadLeaflet = async () => {
       if (!window.L) {
-        // Load Leaflet CSS
         const link = document.createElement('link')
         link.rel = 'stylesheet'
         link.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'
         document.head.appendChild(link)
 
-        // Load Leaflet JS
         await new Promise((resolve) => {
           const script = document.createElement('script')
           script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'
@@ -83,6 +82,7 @@ export default function PropertiesMap({ properties }) {
       if (mapInstance.current) {
         mapInstance.current.remove()
         mapInstance.current = null
+        setMapLoaded(false)
       }
     }
   }, [])
@@ -93,73 +93,132 @@ export default function PropertiesMap({ properties }) {
     const map = mapInstance.current
 
     // Clear existing markers
-    map.eachLayer(layer => {
-      if (layer instanceof L.Marker) map.removeLayer(layer)
-    })
+    markersRef.current.forEach(m => map.removeLayer(m))
+    markersRef.current = []
 
     properties.forEach(p => {
       const coords = LOCATION_COORDS[p.location]
       if (!coords) return
 
-      // Custom black pin icon
+      const priceLabel = formatPrice(p.price)
+
       const icon = L.divIcon({
-        html: `<div style="
-          background: black; color: white; padding: 4px 8px;
-          font-size: 11px; font-weight: 600; font-family: Inter, sans-serif;
-          white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-          cursor: pointer; border-radius: 2px;
-        ">${formatPrice(p.price)}</div>`,
+        html: `
+          <div style="
+            background-color: #000000;
+            color: #ffffff;
+            padding: 5px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: Inter, sans-serif;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            cursor: pointer;
+            border-radius: 3px;
+            display: inline-block;
+            line-height: 1.4;
+            position: relative;
+          ">
+            ${priceLabel}
+            <div style="
+              position: absolute;
+              bottom: -5px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 0;
+              height: 0;
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-top: 5px solid #000000;
+            "></div>
+          </div>
+        `,
         className: '',
         iconAnchor: [0, 0],
+        iconSize: null,
       })
 
+      const jitter = 0.006
       const marker = L.marker(
-        [coords.lat + (Math.random() - 0.5) * 0.008, coords.lng + (Math.random() - 0.5) * 0.008],
+        [
+          coords.lat + (Math.random() - 0.5) * jitter,
+          coords.lng + (Math.random() - 0.5) * jitter
+        ],
         { icon }
       ).addTo(map)
 
       marker.on('click', () => setSelected(p))
+      markersRef.current.push(marker)
     })
   }, [mapLoaded, properties, currency])
 
   return (
-    <div style={{ position: 'relative', borderRadius: '0', overflow: 'hidden', border: '1px solid #e5e7eb' }}>
-      <div ref={mapRef} style={{ height: '400px', width: '100%', backgroundColor: '#f3f4f6' }} />
+    <div style={{ position: 'relative', overflow: 'hidden', border: '1px solid #e5e7eb' }}>
+      <div ref={mapRef} style={{ height: '420px', width: '100%', backgroundColor: '#f3f4f6' }} />
 
-      {/* Selected Property Popup */}
+      {/* Selected Property Card */}
       {selected && (
         <div style={{
-          position: 'absolute', bottom: '16px', left: '16px', right: '16px',
-          maxWidth: '320px', backgroundColor: 'white', border: '1px solid #e5e7eb',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.15)', padding: '16px', zIndex: 1000
+          position: 'absolute', bottom: '16px', left: '16px',
+          width: '300px', backgroundColor: 'white',
+          border: '1px solid #e5e7eb',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+          zIndex: 1000, overflow: 'hidden'
         }}>
           <button onClick={() => setSelected(null)}
-            style={{ position: 'absolute', top: '10px', right: '12px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', color: '#9ca3af' }}>
+            style={{
+              position: 'absolute', top: '8px', right: '10px',
+              background: 'none', border: 'none', cursor: 'pointer',
+              fontSize: '14px', color: '#9ca3af', zIndex: 2, lineHeight: 1
+            }}>
             ✕
           </button>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <img
-              src={selected.images ? selected.images.split(',')[0].trim() : ''}
-              alt={selected.title}
-              style={{ width: '72px', height: '56px', objectFit: 'cover', flexShrink: 0 }}
-            />
-            <div style={{ minWidth: 0 }}>
-              <p style={{ fontSize: '11px', color: '#9ca3af', marginBottom: '3px' }}>{selected.location}, Bali</p>
-              <p style={{ fontSize: '13px', fontWeight: 500, lineHeight: 1.3, marginBottom: '6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{selected.title}</p>
-              <p style={{ fontSize: '14px', fontWeight: 700, marginBottom: '8px' }}>{formatPrice(selected.price)}</p>
-              <a href={'/property/' + selected.slug}
-                style={{ fontSize: '12px', backgroundColor: 'black', color: 'white', padding: '5px 12px', textDecoration: 'none', fontWeight: 500 }}>
-                View →
-              </a>
-            </div>
+
+          <img
+            src={selected.images ? selected.images.split(',')[0].trim() : ''}
+            alt={selected.title}
+            style={{ width: '100%', height: '140px', objectFit: 'cover', display: 'block' }}
+          />
+
+          <div style={{ padding: '12px 14px 14px' }}>
+            <p style={{ fontSize: '11px', color: '#9ca3af', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              {selected.location}, Bali
+            </p>
+            <p style={{ fontSize: '13px', fontWeight: 600, lineHeight: 1.35, marginBottom: '8px', color: 'black', paddingRight: '20px' }}>
+              {selected.title}
+            </p>
+            <p style={{ fontSize: '15px', fontWeight: 700, marginBottom: '12px', color: 'black' }}>
+              {formatPrice(selected.price)}
+            </p>
+            <a href={'/property/' + selected.slug}
+              style={{
+                display: 'block', textAlign: 'center',
+                backgroundColor: 'black', color: 'white',
+                fontSize: '12px', fontWeight: 600,
+                padding: '9px', textDecoration: 'none'
+              }}>
+              View Property →
+            </a>
           </div>
         </div>
       )}
 
-      {/* Map Label */}
-      <div style={{ position: 'absolute', top: '12px', left: '12px', backgroundColor: 'white', padding: '6px 12px', fontSize: '12px', fontWeight: 600, color: '#374151', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', zIndex: 999 }}>
-        {properties.length} Properties
+      {/* Properties count badge */}
+      <div style={{
+        position: 'absolute', top: '12px', left: '52px',
+        backgroundColor: 'white', padding: '6px 12px',
+        fontSize: '12px', fontWeight: 600, color: '#374151',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)', zIndex: 999
+      }}>
+        {properties.length} {properties.length === 1 ? 'Property' : 'Properties'}
       </div>
+
+      <style>{`
+        .leaflet-div-icon {
+          background: transparent !important;
+          border: none !important;
+        }
+      `}</style>
     </div>
   )
 }
