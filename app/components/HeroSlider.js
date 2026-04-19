@@ -11,10 +11,14 @@ const slides = [
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
     const t = setInterval(() => setCurrent(p => (p + 1) % slides.length), 6000)
-    return () => clearInterval(t)
+    return () => { clearInterval(t); window.removeEventListener('resize', check) }
   }, [])
 
   const prev = () => setCurrent(p => (p - 1 + slides.length) % slides.length)
@@ -23,7 +27,6 @@ export default function HeroSlider() {
   return (
     <div style={{ position: 'relative', height: '100svh', minHeight: '600px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-      {/* Slides with Ken Burns */}
       <AnimatePresence mode="wait">
         <motion.div key={current}
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -32,18 +35,16 @@ export default function HeroSlider() {
           <motion.img
             src={slides[current].url}
             alt={slides[current].label}
-            initial={{ scale: 1.08 }}
-            animate={{ scale: 1 }}
+            initial={{ scale: 1.08 }} animate={{ scale: 1 }}
             transition={{ duration: 7, ease: 'linear' }}
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.6) 100%)' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%)' }} />
         </motion.div>
       </AnimatePresence>
 
       {/* Content */}
-      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 20px', maxWidth: '900px', width: '100%' }}>
-
+      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 20px', maxWidth: '1000px', width: '100%' }}>
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           style={{ fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', marginBottom: '20px' }}>
@@ -52,14 +53,14 @@ export default function HeroSlider() {
 
         <motion.h1
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
-          style={{ fontSize: 'clamp(36px, 6vw, 72px)', fontWeight: 300, lineHeight: 1.1, color: 'white', margin: '0 0 20px', letterSpacing: '-0.5px' }}>
+          style={{ fontSize: isMobile ? '36px' : '64px', fontWeight: 300, lineHeight: 1.1, color: 'white', margin: '0 0 16px', letterSpacing: '-0.5px', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
           Find Your <span style={{ fontWeight: 700 }}>Dream Villa</span> in Bali
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-          style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(14px, 2vw, 17px)', marginBottom: '32px', lineHeight: 1.65, maxWidth: '500px', margin: '0 auto 32px' }}>
-          Curated villas and land across Bali's most sought-after locations.
+          style={{ color: 'rgba(255,255,255,0.7)', fontSize: isMobile ? '14px' : '17px', marginBottom: '32px', lineHeight: 1.5, whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
+          Curated villas and land across Bali's most sought-after locations. Trusted by investors worldwide.
         </motion.p>
 
         <motion.div
@@ -74,22 +75,25 @@ export default function HeroSlider() {
           </a>
         </motion.div>
 
-        {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
           style={{ display: 'flex', gap: '40px', justifyContent: 'center', marginTop: '56px', flexWrap: 'wrap' }}>
           {[{ n: '50+', l: 'Properties' }, { n: '10+', l: 'Years Exp' }, { n: '1000+', l: 'Managed' }].map(s => (
             <div key={s.l} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 300, color: 'white', lineHeight: 1 }}>{s.n}</div>
+              <div style={{ fontSize: isMobile ? '28px' : '40px', fontWeight: 300, color: 'white', lineHeight: 1 }}>{s.n}</div>
               <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '2px', marginTop: '6px' }}>{s.l}</div>
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Arrows */}
-      <button onClick={prev} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', width: '40px', height: '40px', cursor: 'pointer', fontSize: '20px', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>‹</button>
-      <button onClick={next} style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', width: '40px', height: '40px', cursor: 'pointer', fontSize: '20px', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>›</button>
+      {/* Arrows — desktop only */}
+      {!isMobile && (
+        <>
+          <button onClick={prev} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', width: '40px', height: '40px', cursor: 'pointer', fontSize: '20px', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>‹</button>
+          <button onClick={next} style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', width: '40px', height: '40px', cursor: 'pointer', fontSize: '20px', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>›</button>
+        </>
+      )}
 
       {/* Dots */}
       <div style={{ position: 'absolute', bottom: '24px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '8px', zIndex: 3 }}>

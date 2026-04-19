@@ -33,7 +33,7 @@ export default async function Home({ searchParams }) {
       <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)', maxWidth: '1100px', margin: '0 auto' }}>
         <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Why Choose Us</p>
         <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '40px', lineHeight: 1.2 }}>
-          The smart way to invest<br /><strong>in Bali real estate</strong>
+          The smart way to invest <strong>in Bali real estate</strong>
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '32px' }}>
           {[
@@ -49,17 +49,25 @@ export default async function Home({ searchParams }) {
         </div>
       </div>
 
-      {/* LISTINGS */}
+      {/* FEATURED LISTINGS */}
       <div id="listings" style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Properties</p>
-          <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '32px' }}>Available <strong>Listings</strong></h2>
-          <AdvancedSearch />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', marginTop: '24px' }}>
-            {properties?.map(p => <PropertyCard key={p.slug} property={p} />)}
-            {(!properties || properties.length === 0) && (
-              <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#d1d5db', padding: '60px 0', fontSize: '14px' }}>No properties found.</p>
-            )}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '12px' }}>
+            <div>
+              <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '8px' }}>Properties</p>
+              <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300 }}>Featured <strong>Listings</strong></h2>
+            </div>
+            <a href="/properties" style={{ fontSize: '13px', color: 'black', textDecoration: 'none', border: '1px solid #e5e7eb', padding: '8px 16px', whiteSpace: 'nowrap' }}>
+              View All Properties →
+            </a>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
+            {properties?.slice(0, 6).map(p => <PropertyCard key={p.slug} property={p} />)}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <a href="/properties" style={{ display: 'inline-block', border: '1px solid black', color: 'black', fontSize: '14px', padding: '13px 32px', textDecoration: 'none', fontWeight: 500 }}>
+              Browse All Properties
+            </a>
           </div>
         </div>
       </div>
@@ -69,13 +77,13 @@ export default async function Home({ searchParams }) {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Areas We Cover</p>
           <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '32px' }}>Popular <strong>Locations</strong></h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
             {['Canggu', 'Seminyak', 'Ubud', 'Jimbaran', 'Uluwatu', 'Sanur', 'Pererenan', 'Kerobokan'].map(loc => (
-              <a key={loc} href={'/?location=' + loc} style={{
-                backgroundColor: 'white', border: '1px solid #e5e7eb', padding: '16px 14px',
+              <a key={loc} href={'/properties?location=' + loc} style={{
+                backgroundColor: 'white', border: '1px solid #e5e7eb', padding: 'clamp(14px, 2vw, 20px) clamp(12px, 2vw, 16px)',
                 textDecoration: 'none', color: 'black', display: 'block'
               }}>
-                <p style={{ fontWeight: 500, fontSize: '13px' }}>{loc}</p>
+                <p style={{ fontWeight: 500, fontSize: 'clamp(12px, 1.5vw, 14px)' }}>{loc}</p>
                 <p style={{ fontSize: '11px', color: '#9ca3af', marginTop: '3px' }}>Bali</p>
               </a>
             ))}
@@ -88,7 +96,7 @@ export default async function Home({ searchParams }) {
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Get In Touch</p>
           <h2 style={{ fontSize: 'clamp(28px, 5vw, 40px)', fontWeight: 300, marginBottom: '16px', lineHeight: 1.2 }}>
-            Ready to find your<br /><strong>perfect villa?</strong>
+            Ready to find your <strong>perfect villa?</strong>
           </h2>
           <p style={{ color: '#6b7280', fontSize: '14px', marginBottom: '32px', lineHeight: 1.7 }}>
             Our local team is ready to help. Reach out on WhatsApp for a free consultation.
@@ -102,10 +110,16 @@ export default async function Home({ searchParams }) {
 
       {/* FOOTER */}
       <footer style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(32px, 5vw, 48px) clamp(20px, 5vw, 48px)', backgroundColor: 'white' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '32px' }}>
           <div>
             <p style={{ fontWeight: 700, marginBottom: '8px', fontSize: '15px' }}>Great Bali Properties</p>
             <p style={{ fontSize: '13px', color: '#9ca3af', lineHeight: 1.7 }}>Premium villa and land listings across Bali. A proud partner of Great Bali Villas.</p>
+          </div>
+          <div>
+            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>Properties</p>
+            <a href="/properties" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>All Properties</a>
+            <a href="/properties?type=villa" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>Villas</a>
+            <a href="/properties?type=land" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none' }}>Land</a>
           </div>
           <div>
             <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>Locations</p>
