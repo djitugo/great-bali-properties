@@ -1,6 +1,7 @@
 import { supabase } from '../lib/supabase'
 import PropertyCard from '../components/PropertyCard'
 import AdvancedSearch from '../components/AdvancedSearch'
+import PropertiesMap from '../components/PropertiesMap'
 
 export default async function PropertiesPage({ searchParams }) {
   const params = await searchParams
@@ -11,8 +12,10 @@ export default async function PropertiesPage({ searchParams }) {
   const maxPrice = params?.maxPrice || ''
   const bedrooms = params?.bedrooms || ''
   const priceTypeParam = params?.price_type || ''
+  const sort = params?.sort || 'featured'
 
-  let query = supabase.from('properties').select('*').order('featured', { ascending: false })
+  let query = supabase.from('properties').select('*')
+
   if (location) query = query.eq('location', location)
   if (type) query = query.eq('property_type', type)
   if (status) query = query.eq('status', status)
@@ -21,6 +24,13 @@ export default async function PropertiesPage({ searchParams }) {
   if (bedrooms) query = query.gte('bedrooms', bedrooms)
   if (priceTypeParam) query = query.eq('price_type', priceTypeParam)
 
+  // #2 — Sort
+  if (sort === 'price_asc') query = query.order('price', { ascending: true })
+  else if (sort === 'price_desc') query = query.order('price', { ascending: false })
+  else if (sort === 'alpha') query = query.order('title', { ascending: true })
+  else if (sort === 'new') query = query.order('created_at', { ascending: false })
+  else query = query.order('featured', { ascending: false })
+
   const { data: properties } = await query
 
   return (
@@ -28,21 +38,50 @@ export default async function PropertiesPage({ searchParams }) {
 
       {/* Page Header */}
       <div style={{ paddingTop: '64px', backgroundColor: '#f9fafb', borderBottom: '1px solid #e5e7eb' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(32px, 5vw, 56px) clamp(20px, 5vw, 48px)' }}>
-          <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '12px' }}>Browse</p>
-          <h1 style={{ fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 300, marginBottom: '8px' }}>
-            All <strong>Properties</strong>
-          </h1>
-          <p style={{ fontSize: '14px', color: '#6b7280' }}>
-            {properties?.length || 0} properties found in Bali
-          </p>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(28px, 5vw, 48px) clamp(20px, 5vw, 48px)' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '10px' }}>Browse</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '12px' }}>
+            <div>
+              <h1 style={{ fontSize: 'clamp(26px, 5vw, 44px)', fontWeight: 300, marginBottom: '6px' }}>
+                All <strong>Properties</strong>
+              </h1>
+              <p style={{ fontSize: '14px', color: '#6b7280' }}>{properties?.length || 0} properties found</p>
+            </div>
+
+            {/* #2 — Sort dropdown */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <label style={{ fontSize: '13px', color: '#6b7280', whiteSpace: 'nowrap' }}>Sort by:</label>
+              <select
+                defaultValue={sort}
+                onChange={e => {
+                  const url = new URL(window.location.href)
+                  url.searchParams.set('sort', e.target.value)
+                  window.location.href = url.toString()
+                }}
+                style={{ border: '1px solid #e5e7eb', padding: '8px 12px', fontSize: '13px', backgroundColor: 'white', cursor: 'pointer', appearance: 'none', paddingRight: '28px',
+                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\")",
+                  backgroundRepeat: 'no-repeat', backgroundPosition: 'right 8px center', backgroundSize: '12px' }}>
+                <option value="featured">Featured First</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+                <option value="alpha">Alphabetically</option>
+                <option value="new">Newest First</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Search + Results */}
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(24px, 4vw, 48px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(24px, 4vw, 40px) clamp(20px, 5vw, 48px)' }}>
         <AdvancedSearch />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', marginTop: '8px' }}>
+
+        {/* #5 — Map */}
+        <div style={{ marginBottom: '32px' }}>
+          <PropertiesMap properties={properties || []} />
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
           {properties?.map(p => <PropertyCard key={p.slug} property={p} />)}
           {(!properties || properties.length === 0) && (
             <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '80px 0' }}>
@@ -53,27 +92,8 @@ export default async function PropertiesPage({ searchParams }) {
         </div>
       </div>
 
-      {/* Footer */}
       <footer style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(32px, 5vw, 48px) clamp(20px, 5vw, 48px)', backgroundColor: 'white', marginTop: '48px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
-          <div>
-            <p style={{ fontWeight: 700, marginBottom: '8px', fontSize: '15px' }}>Great Bali Properties</p>
-            <p style={{ fontSize: '13px', color: '#9ca3af', lineHeight: 1.7 }}>Premium villa and land listings across Bali.</p>
-          </div>
-          <div>
-            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>Quick Links</p>
-            <a href="/" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>Home</a>
-            <a href="/properties" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>All Properties</a>
-            <a href="/contact" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none' }}>Contact</a>
-          </div>
-          <div>
-            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>Contact</p>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>WhatsApp</a>
-            <p style={{ fontSize: '13px', color: '#6b7280' }}>info@greatbaliproperties.com</p>
-          </div>
-        </div>
-        <div style={{ borderTop: '1px solid #f3f4f6', marginTop: '32px', paddingTop: '20px', textAlign: 'center' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
           <p style={{ fontSize: '12px', color: '#d1d5db' }}>© 2025 Great Bali Properties. All rights reserved.</p>
         </div>
       </footer>

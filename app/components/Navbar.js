@@ -42,7 +42,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [openCurrency, setOpenCurrency] = useState(false)
   const [openLang, setOpenLang] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
@@ -104,16 +103,30 @@ export default function Navbar() {
         boxShadow: scrolled ? '0 1px 8px rgba(0,0,0,0.06)' : 'none',
         transition: 'box-shadow 0.3s'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '16px' }}>
 
-          {/* Logo */}
-          <a href="/" style={{ textDecoration: 'none', color: 'black', flexShrink: 0 }}>
+          {/* #3 — translate="no" supaya site title tidak ikut translate */}
+          <a href="/" translate="no" style={{ textDecoration: 'none', color: 'black', flexShrink: 0 }}>
             <div style={{ fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>Great Bali Properties</div>
             <div style={{ fontSize: '10px', color: '#9ca3af' }}>by Great Bali Villas</div>
           </a>
 
+          {/* #1 — Search box inline di header, minimalist */}
+          <form onSubmit={handleSearch} className="gbp-desktop" style={{ flex: 1, maxWidth: '280px', display: 'flex', alignItems: 'center', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Search properties..."
+              style={{ flex: 1, border: 'none', padding: '8px 12px', fontSize: '13px', outline: 'none', backgroundColor: 'transparent', color: '#374151' }}
+            />
+            <button type="submit" style={{ background: 'none', border: 'none', padding: '8px 10px', cursor: 'pointer', color: '#9ca3af', display: 'flex', alignItems: 'center' }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </form>
+
           {/* Desktop Menu */}
-          <div className="gbp-desktop" style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+          <div className="gbp-desktop" style={{ display: 'flex', alignItems: 'center', gap: '2px', marginLeft: 'auto' }}>
             {menus.map(m => (
               <div key={m.id} style={{ position: 'relative' }}
                 onMouseEnter={() => setOpenMenu(m.id)}
@@ -142,16 +155,10 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* Search Icon */}
-            <button onClick={() => setSearchOpen(!searchOpen)}
-              style={{ padding: '8px 10px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', color: '#374151', display: 'flex', alignItems: 'center' }}>
-              🔍
-            </button>
-
-            {/* Language EN/ID */}
+            {/* Language */}
             <div style={{ position: 'relative', marginLeft: '4px' }}>
               <button onClick={() => { setOpenLang(!openLang); setOpenCurrency(false) }}
-                style={{ padding: '6px 10px', fontSize: '13px', fontWeight: 500, color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap' }}>
+                style={{ padding: '6px 10px', fontSize: '13px', fontWeight: 500, color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 {lang === 'en' ? 'EN' : 'ID'} <span style={{ fontSize: '8px' }}>▾</span>
               </button>
               {openLang && (
@@ -162,16 +169,16 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Currency IDR/USD */}
+            {/* Currency */}
             <div style={{ position: 'relative', marginLeft: '4px' }}>
               <button onClick={() => { setOpenCurrency(!openCurrency); setOpenLang(false) }}
-                style={{ padding: '6px 10px', fontSize: '13px', fontWeight: 500, color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap' }}>
+                style={{ padding: '6px 10px', fontSize: '13px', fontWeight: 500, color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 {currency} <span style={{ fontSize: '8px' }}>▾</span>
               </button>
               {openCurrency && (
                 <div style={drop}>
                   <button onClick={() => handleCurrency('IDR')} style={{ ...dropBtn, fontWeight: currency === 'IDR' ? 700 : 400 }}>IDR — Rupiah</button>
-                  <button onClick={() => handleCurrency('USD')} style={{ ...dropBtn, fontWeight: currency === 'USD' ? 700 : 400 }}>USD — US Dollar</button>
+                  <button onClick={() => handleCurrency('USD')} style={{ ...dropBtn, fontWeight: currency === 'USD' ? 700 : 400 }}>USD — Dollar</button>
                 </div>
               )}
             </div>
@@ -185,7 +192,7 @@ export default function Navbar() {
 
           {/* Hamburger */}
           <button onClick={() => setMobileOpen(!mobileOpen)} className="gbp-mobile"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}>
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', marginLeft: 'auto' }}>
             <div style={{ width: '22px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <span style={{ display: 'block', height: '2px', backgroundColor: 'black', transition: 'all 0.3s', transform: mobileOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
               <span style={{ display: 'block', height: '2px', backgroundColor: 'black', opacity: mobileOpen ? 0 : 1, transition: 'all 0.3s' }} />
@@ -194,35 +201,11 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Search Bar */}
-        {searchOpen && (
-          <div style={{ borderTop: '1px solid #e5e7eb', padding: '12px 24px', backgroundColor: 'white' }}>
-            <form onSubmit={handleSearch} style={{ maxWidth: '600px', margin: '0 auto', display: 'flex', gap: '8px' }}>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search properties by location, type..."
-                autoFocus
-                style={{ flex: 1, border: '1px solid #e5e7eb', padding: '10px 14px', fontSize: '14px', outline: 'none' }}
-              />
-              <button type="submit"
-                style={{ backgroundColor: 'black', color: 'white', padding: '10px 20px', fontSize: '13px', fontWeight: 600, border: 'none', cursor: 'pointer' }}>
-                Search
-              </button>
-              <button type="button" onClick={() => setSearchOpen(false)}
-                style={{ backgroundColor: 'white', color: '#6b7280', padding: '10px 14px', fontSize: '13px', border: '1px solid #e5e7eb', cursor: 'pointer' }}>
-                ✕
-              </button>
-            </form>
-          </div>
-        )}
-
         {/* Mobile Menu */}
         {mobileOpen && (
           <div style={{ backgroundColor: 'white', borderTop: '1px solid #f3f4f6', padding: '16px 24px 32px', maxHeight: '85vh', overflowY: 'auto' }}>
             {/* Mobile Search */}
-            <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
+            <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', marginBottom: '20px' }}>
               <input
                 type="text"
                 value={searchQuery}
@@ -231,8 +214,8 @@ export default function Navbar() {
                 style={{ flex: 1, border: '1px solid #e5e7eb', padding: '10px 12px', fontSize: '14px', outline: 'none' }}
               />
               <button type="submit"
-                style={{ backgroundColor: 'black', color: 'white', padding: '10px 14px', fontSize: '13px', border: 'none', cursor: 'pointer' }}>
-                🔍
+                style={{ backgroundColor: 'black', color: 'white', padding: '10px 14px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               </button>
             </form>
 
@@ -251,22 +234,18 @@ export default function Navbar() {
             ))}
 
             <div style={{ display: 'flex', gap: '8px', marginTop: '16px', flexWrap: 'wrap' }}>
-              <button onClick={() => handleLang('en')}
-                style={{ flex: 1, padding: '8px', fontSize: '13px', border: lang === 'en' ? '2px solid black' : '1px solid #e5e7eb', background: lang === 'en' ? 'black' : 'white', color: lang === 'en' ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
-                EN
-              </button>
-              <button onClick={() => handleLang('id')}
-                style={{ flex: 1, padding: '8px', fontSize: '13px', border: lang === 'id' ? '2px solid black' : '1px solid #e5e7eb', background: lang === 'id' ? 'black' : 'white', color: lang === 'id' ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
-                ID
-              </button>
-              <button onClick={() => handleCurrency('IDR')}
-                style={{ flex: 1, padding: '8px', fontSize: '13px', border: currency === 'IDR' ? '2px solid black' : '1px solid #e5e7eb', background: currency === 'IDR' ? 'black' : 'white', color: currency === 'IDR' ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
-                IDR
-              </button>
-              <button onClick={() => handleCurrency('USD')}
-                style={{ flex: 1, padding: '8px', fontSize: '13px', border: currency === 'USD' ? '2px solid black' : '1px solid #e5e7eb', background: currency === 'USD' ? 'black' : 'white', color: currency === 'USD' ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
-                USD
-              </button>
+              {['EN', 'ID'].map(l => (
+                <button key={l} onClick={() => handleLang(l.toLowerCase())}
+                  style={{ flex: 1, padding: '8px', fontSize: '13px', border: lang === l.toLowerCase() ? '2px solid black' : '1px solid #e5e7eb', background: lang === l.toLowerCase() ? 'black' : 'white', color: lang === l.toLowerCase() ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
+                  {l}
+                </button>
+              ))}
+              {['IDR', 'USD'].map(c => (
+                <button key={c} onClick={() => handleCurrency(c)}
+                  style={{ flex: 1, padding: '8px', fontSize: '13px', border: currency === c ? '2px solid black' : '1px solid #e5e7eb', background: currency === c ? 'black' : 'white', color: currency === c ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
+                  {c}
+                </button>
+              ))}
             </div>
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', backgroundColor: 'black', color: 'white', textAlign: 'center', padding: '13px', fontSize: '14px', textDecoration: 'none', marginTop: '16px', fontWeight: 600 }}>
@@ -276,18 +255,20 @@ export default function Navbar() {
         )}
       </nav>
 
-      {/* Floating WhatsApp */}
+      {/* #4 — Floating WhatsApp hitam dengan SVG icon */}
       <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
         style={{
           position: 'fixed', bottom: '24px', right: '24px', zIndex: 9998,
-          backgroundColor: '#25D366', color: 'white', width: '56px', height: '56px',
+          backgroundColor: 'black', color: 'white', width: '52px', height: '52px',
           borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '26px', boxShadow: '0 4px 16px rgba(37,211,102,0.4)', textDecoration: 'none',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.25)', textDecoration: 'none',
           transition: 'transform 0.2s, box-shadow 0.2s'
         }}
-        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(37,211,102,0.5)' }}
-        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(37,211,102,0.4)' }}>
-        💬
+        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.35)' }}
+        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.25)' }}>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
       </a>
 
       <style>{`

@@ -39,11 +39,11 @@ export default function HeroSlider() {
             transition={{ duration: 7, ease: 'linear' }}
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%)' }} />
+          {/* #6 — overlay lebih gelap */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.75) 100%)' }} />
         </motion.div>
       </AnimatePresence>
 
-      {/* Content */}
       <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 20px', maxWidth: '1000px', width: '100%' }}>
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
@@ -59,16 +59,14 @@ export default function HeroSlider() {
 
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-          style={{ color: 'rgba(255,255,255,0.7)', fontSize: isMobile ? '14px' : '17px', marginBottom: '32px', lineHeight: 1.5, whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
+          style={{ color: 'rgba(255,255,255,0.75)', fontSize: isMobile ? '14px' : '17px', marginBottom: '32px', lineHeight: 1.5, whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
           Curated villas and land across Bali's most sought-after locations. Trusted by investors worldwide.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
           style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#listings" style={{ backgroundColor: 'white', color: 'black', fontSize: '13px', padding: '13px 28px', textDecoration: 'none', fontWeight: 600 }}>
-            View Listings
-          </a>
+          <a href="#listings" style={{ backgroundColor: 'white', color: 'black', fontSize: '13px', padding: '13px 28px', textDecoration: 'none', fontWeight: 600 }}>View Listings</a>
           <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
             style={{ border: '1.5px solid rgba(255,255,255,0.7)', color: 'white', fontSize: '13px', padding: '13px 28px', textDecoration: 'none' }}>
             Contact Agent
@@ -81,7 +79,7 @@ export default function HeroSlider() {
           {[{ n: '50+', l: 'Properties' }, { n: '10+', l: 'Years Exp' }, { n: '1000+', l: 'Managed' }].map(s => (
             <div key={s.l} style={{ textAlign: 'center' }}>
               <div style={{ fontSize: isMobile ? '28px' : '40px', fontWeight: 300, color: 'white', lineHeight: 1 }}>{s.n}</div>
-              <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '2px', marginTop: '6px' }}>{s.l}</div>
+              <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '2px', marginTop: '6px' }}>{s.l}</div>
             </div>
           ))}
         </motion.div>
@@ -90,12 +88,11 @@ export default function HeroSlider() {
       {/* Arrows — desktop only */}
       {!isMobile && (
         <>
-          <button onClick={prev} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', width: '40px', height: '40px', cursor: 'pointer', fontSize: '20px', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>‹</button>
-          <button onClick={next} style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', width: '40px', height: '40px', cursor: 'pointer', fontSize: '20px', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>›</button>
+          <button onClick={prev} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', width: '40px', height: '40px', cursor: 'pointer', fontSize: '20px', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>‹</button>
+          <button onClick={next} style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', width: '40px', height: '40px', cursor: 'pointer', fontSize: '20px', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>›</button>
         </>
       )}
 
-      {/* Dots */}
       <div style={{ position: 'absolute', bottom: '24px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '8px', zIndex: 3 }}>
         {slides.map((_, i) => (
           <button key={i} onClick={() => setCurrent(i)} style={{ width: i === current ? '24px' : '8px', height: '8px', borderRadius: '4px', backgroundColor: i === current ? 'white' : 'rgba(255,255,255,0.4)', border: 'none', cursor: 'pointer', transition: 'all 0.3s', padding: 0 }} />
