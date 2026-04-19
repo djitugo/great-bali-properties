@@ -12,13 +12,26 @@ export default async function PropertyDetail({ params }) {
     </div>
   )
 
-  // Fetch related properties
-  const { data: related } = await supabase
+  // Fetch related — same location first, fallback to other properties
+  let { data: related } = await supabase
     .from('properties')
     .select('*')
     .eq('location', p.location)
     .neq('slug', slug)
     .limit(3)
+
+  // If less than 3 related in same location, fill with other properties
+  if (!related || related.length < 3) {
+    const existingSlugs = [slug, ...(related || []).map(r => r.slug)]
+    const needed = 3 - (related?.length || 0)
+    const { data: others } = await supabase
+      .from('properties')
+      .select('*')
+      .not('slug', 'in', `(${existingSlugs.map(s => `"${s}"`).join(',')})`)
+      .eq('featured', true)
+      .limit(needed)
+    related = [...(related || []), ...(others || [])]
+  }
 
   return <PropertyDetailClient property={p} related={related || []} />
 }
