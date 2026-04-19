@@ -10,7 +10,6 @@ const menuItems = [
       { label: 'Land for Sale', href: '/?type=land&status=for_sale' },
       { label: 'Villas for Rent', href: '/?type=villa&status=for_rent' },
       { label: 'Commercial', href: '/?type=commercial' },
-      { label: 'Featured Properties', href: '/?featured=true' },
     ]
   },
   {
@@ -22,7 +21,6 @@ const menuItems = [
       { label: 'Jimbaran', href: '/?location=Jimbaran' },
       { label: 'Uluwatu', href: '/?location=Uluwatu' },
       { label: 'Sanur', href: '/?location=Sanur' },
-      { label: 'Pererenan', href: '/?location=Pererenan' },
     ]
   },
   {
@@ -50,33 +48,35 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white shadow-sm' : 'bg-white/80 backdrop-blur-md'
-    } border-b border-gray-100`}>
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <nav style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+      backgroundColor: 'white',
+      borderBottom: '1px solid #f3f4f6',
+      boxShadow: scrolled ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
+      transition: 'box-shadow 0.3s'
+    }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
         {/* Logo */}
-        <a href="/" className="flex flex-col">
-          <span className="font-semibold tracking-tight text-base leading-none">Great Bali Properties</span>
-          <span className="text-xs text-gray-400 mt-0.5">by Great Bali Villas</span>
+        <a href="/" style={{ textDecoration: 'none', color: 'black' }}>
+          <div style={{ fontWeight: 600, fontSize: '15px', letterSpacing: '-0.3px' }}>Great Bali Properties</div>
+          <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '1px' }}>by Great Bali Villas</div>
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
           {menuItems.map(item => (
-            <div key={item.label} className="relative"
+            <div key={item.label} style={{ position: 'relative' }}
               onMouseEnter={() => setOpenMenu(item.label)}
               onMouseLeave={() => setOpenMenu(null)}>
               {item.href ? (
-                <a href={item.href}
-                  className="text-sm text-gray-600 hover:text-black transition flex items-center gap-1">
+                <a href={item.href} style={{ fontSize: '13px', color: '#4b5563', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   {item.label}
                 </a>
               ) : (
-                <button className="text-sm text-gray-600 hover:text-black transition flex items-center gap-1">
+                <button style={{ fontSize: '13px', color: '#4b5563', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', padding: 0 }}>
                   {item.label}
-                  <svg className={`w-3 h-3 transition-transform ${openMenu === item.label ? 'rotate-180' : ''}`}
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg style={{ width: '10px', height: '10px', transform: openMenu === item.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -84,11 +84,16 @@ export default function Navbar() {
 
               {/* Dropdown */}
               {item.dropdown && openMenu === item.label && (
-                <div className="absolute top-full left-0 pt-2 w-52">
-                  <div className="bg-white border border-gray-100 shadow-lg py-2">
+                <div style={{
+                  position: 'absolute', top: '100%', left: 0, paddingTop: '8px', width: '200px', zIndex: 100
+                }}>
+                  <div style={{ background: 'white', border: '1px solid #f3f4f6', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', padding: '8px 0' }}>
                     {item.dropdown.map(sub => (
-                      <a key={sub.label} href={sub.href}
-                        className="block px-4 py-2.5 text-sm text-gray-600 hover:text-black hover:bg-gray-50 transition">
+                      <a key={sub.label} href={sub.href} style={{
+                        display: 'block', padding: '10px 16px', fontSize: '13px', color: '#4b5563', textDecoration: 'none'
+                      }}
+                        onMouseEnter={e => e.target.style.backgroundColor = '#f9fafb'}
+                        onMouseLeave={e => e.target.style.backgroundColor = 'transparent'}>
                         {sub.label}
                       </a>
                     ))}
@@ -97,52 +102,14 @@ export default function Navbar() {
               )}
             </div>
           ))}
-        </div>
 
-        {/* CTA */}
-        <div className="hidden md:flex items-center gap-3">
+          {/* CTA */}
           <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-            className="text-sm bg-black text-white px-4 py-2 hover:bg-gray-800 transition">
+            style={{ fontSize: '13px', backgroundColor: 'black', color: 'white', padding: '8px 18px', textDecoration: 'none', fontWeight: 500 }}>
             WhatsApp Us
           </a>
         </div>
-
-        {/* Mobile hamburger */}
-        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-          <div className="space-y-1.5">
-            <span className={`block w-6 h-0.5 bg-black transition-all ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-black transition-all ${mobileOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-black transition-all ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-          </div>
-        </button>
       </div>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-6 py-4">
-          {menuItems.map(item => (
-            <div key={item.label} className="mb-4">
-              <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">{item.label}</p>
-              {item.dropdown ? (
-                item.dropdown.map(sub => (
-                  <a key={sub.label} href={sub.href}
-                    className="block text-sm text-gray-600 py-1.5 hover:text-black transition">
-                    {sub.label}
-                  </a>
-                ))
-              ) : (
-                <a href={item.href} className="block text-sm text-gray-600 py-1.5 hover:text-black transition">
-                  {item.label}
-                </a>
-              )}
-            </div>
-          ))}
-          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-            className="block w-full text-center bg-black text-white text-sm py-3 mt-4">
-            WhatsApp Us
-          </a>
-        </div>
-      )}
     </nav>
   )
 }
