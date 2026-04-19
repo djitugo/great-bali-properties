@@ -6,11 +6,11 @@ const menus = [
   {
     id: 'properties', label: 'Properties',
     items: [
-      { label: 'All Listings', href: '/#listings' },
-      { label: 'Villas for Sale', href: '/?type=villa&status=for_sale' },
-      { label: 'Land for Sale', href: '/?type=land&status=for_sale' },
-      { label: 'Villas for Rent', href: '/?type=villa&status=for_rent' },
-      { label: 'Commercial', href: '/?type=commercial' },
+      { label: 'All Properties', href: '/properties' },
+      { label: 'Villas for Sale', href: '/properties?type=villa&status=for_sale' },
+      { label: 'Land for Sale', href: '/properties?type=land&status=for_sale' },
+      { label: 'Villas for Rent', href: '/properties?type=villa&status=for_rent' },
+      { label: 'Featured Properties', href: '/properties?featured=true' },
     ]
   },
   { id: 'about', label: 'About', href: '/about' },
@@ -27,8 +27,9 @@ const menus = [
   {
     id: 'featured', label: 'Featured',
     items: [
-      { label: 'Featured Villas', href: '/?featured=true' },
-      { label: 'New Listings', href: '/?sort=new' },
+      { label: 'Featured Villas', href: '/properties?featured=true' },
+      { label: 'New Listings', href: '/properties?sort=new' },
+      { label: 'Price Reduced', href: '/properties?sort=reduced' },
     ]
   },
   { id: 'contact', label: 'Contact', href: '/contact' },
@@ -74,11 +75,17 @@ export default function Navbar() {
   const drop = {
     position: 'absolute', top: '110%', right: 0, backgroundColor: 'white',
     border: '1px solid #e5e7eb', boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
-    zIndex: 9999, minWidth: '120px', padding: '4px 0'
+    zIndex: 9999, minWidth: '160px', padding: '4px 0'
   }
   const dropBtn = {
     display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-    fontSize: '13px', color: '#374151', background: 'none', border: 'none', cursor: 'pointer'
+    fontSize: '13px', color: '#374151', background: 'none', border: 'none', cursor: 'pointer',
+    whiteSpace: 'nowrap'
+  }
+  const menuDrop = {
+    position: 'absolute', top: '100%', left: 0, backgroundColor: 'white',
+    border: '1px solid #e5e7eb', boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+    zIndex: 9999, minWidth: '200px', padding: '4px 0'
   }
 
   return (
@@ -93,31 +100,31 @@ export default function Navbar() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
           {/* Logo */}
-          <a href="/" style={{ textDecoration: 'none', color: 'black' }}>
-            <div style={{ fontWeight: 700, fontSize: '15px' }}>Great Bali Properties</div>
+          <a href="/" style={{ textDecoration: 'none', color: 'black', flexShrink: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>Great Bali Properties</div>
             <div style={{ fontSize: '10px', color: '#9ca3af' }}>by Great Bali Villas</div>
           </a>
 
           {/* Desktop Menu */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }} className="gbp-desktop">
+          <div className="gbp-desktop" style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
             {menus.map(m => (
               <div key={m.id} style={{ position: 'relative' }}
                 onMouseEnter={() => setOpenMenu(m.id)}
                 onMouseLeave={() => setOpenMenu(null)}>
-                {m.href ? (
-                  <a href={m.href} style={{ padding: '8px 11px', fontSize: '13px', color: '#374151', textDecoration: 'none', display: 'block' }}>
+                {m.href && !m.items ? (
+                  <a href={m.href} style={{ padding: '8px 11px', fontSize: '13px', color: '#374151', textDecoration: 'none', display: 'block', whiteSpace: 'nowrap' }}>
                     {m.label}
                   </a>
                 ) : (
-                  <button style={{ padding: '8px 11px', fontSize: '13px', color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '3px' }}>
+                  <button style={{ padding: '8px 11px', fontSize: '13px', color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '3px', whiteSpace: 'nowrap' }}>
                     {m.label} <span style={{ fontSize: '8px', opacity: 0.5 }}>▾</span>
                   </button>
                 )}
                 {m.items && openMenu === m.id && (
-                  <div style={{ position: 'absolute', top: '100%', left: 0, backgroundColor: 'white', border: '1px solid #e5e7eb', boxShadow: '0 8px 24px rgba(0,0,0,0.1)', zIndex: 9999, minWidth: '200px', padding: '4px 0', marginTop: '0' }}>
+                  <div style={menuDrop}>
                     {m.items.map(item => (
                       <a key={item.label} href={item.href}
-                        style={{ display: 'block', padding: '10px 16px', fontSize: '13px', color: '#374151', textDecoration: 'none' }}
+                        style={{ display: 'block', padding: '10px 16px', fontSize: '13px', color: '#374151', textDecoration: 'none', whiteSpace: 'nowrap' }}
                         onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f9fafb'}
                         onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
                         {item.label}
@@ -128,44 +135,44 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* Language EN/ID */}
+            {/* Language */}
             <div style={{ position: 'relative', marginLeft: '8px' }}>
               <button onClick={() => { setOpenLang(!openLang); setOpenCurrency(false) }}
-                style={{ padding: '6px 10px', fontSize: '13px', color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {lang === 'EN' ? 'EN' : 'ID'} <span style={{ fontSize: '8px' }}>▾</span>
+                style={{ padding: '6px 10px', fontSize: '13px', color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap' }}>
+                {lang === 'en' ? '🇬🇧' : '🇮🇩'} <span style={{ fontSize: '8px' }}>▾</span>
               </button>
               {openLang && (
                 <div style={drop}>
                   <button onClick={() => handleLang('en')} style={{ ...dropBtn, fontWeight: lang === 'en' ? 700 : 400 }}>🇬🇧 English</button>
-                  <button onClick={() => handleLang('id')} style={{ ...dropBtn, fontWeight: lang === 'id' ? 700 : 400 }}>🇮🇩 Bahasa</button>
+                  <button onClick={() => handleLang('id')} style={{ ...dropBtn, fontWeight: lang === 'id' ? 700 : 400 }}>🇮🇩 Bahasa Indonesia</button>
                 </div>
               )}
             </div>
 
-            {/* Currency USD/IDR */}
+            {/* Currency */}
             <div style={{ position: 'relative', marginLeft: '4px' }}>
               <button onClick={() => { setOpenCurrency(!openCurrency); setOpenLang(false) }}
-                style={{ padding: '6px 10px', fontSize: '13px', color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {currency === 'IDR' ? 'IDR' : 'USD'} <span style={{ fontSize: '8px' }}>▾</span>
+                style={{ padding: '6px 10px', fontSize: '13px', color: '#374151', background: 'none', border: '1px solid #e5e7eb', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap' }}>
+                {currency} <span style={{ fontSize: '8px' }}>▾</span>
               </button>
               {openCurrency && (
                 <div style={drop}>
-                  <button onClick={() => handleCurrency('IDR')} style={{ ...dropBtn, fontWeight: currency === 'IDR' ? 700 : 400 }}>🇮🇩 IDR</button>
-                  <button onClick={() => handleCurrency('USD')} style={{ ...dropBtn, fontWeight: currency === 'USD' ? 700 : 400 }}>🇺🇸 USD</button>
+                  <button onClick={() => handleCurrency('IDR')} style={{ ...dropBtn, fontWeight: currency === 'IDR' ? 700 : 400 }}>Rupiah (IDR)</button>
+                  <button onClick={() => handleCurrency('USD')} style={{ ...dropBtn, fontWeight: currency === 'USD' ? 700 : 400 }}>US Dollar (USD)</button>
                 </div>
               )}
             </div>
 
             {/* WhatsApp */}
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-              style={{ marginLeft: '8px', backgroundColor: 'black', color: 'white', padding: '8px 18px', fontSize: '13px', fontWeight: 600, textDecoration: 'none' }}>
+              style={{ marginLeft: '8px', backgroundColor: 'black', color: 'white', padding: '8px 18px', fontSize: '13px', fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>
               WhatsApp
             </a>
           </div>
 
           {/* Hamburger */}
           <button onClick={() => setMobileOpen(!mobileOpen)} className="gbp-mobile"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', display: 'none' }}>
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}>
             <div style={{ width: '22px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <span style={{ display: 'block', height: '2px', backgroundColor: 'black', transition: 'all 0.3s', transform: mobileOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
               <span style={{ display: 'block', height: '2px', backgroundColor: 'black', opacity: mobileOpen ? 0 : 1, transition: 'all 0.3s' }} />
@@ -176,25 +183,37 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div style={{ backgroundColor: 'white', borderTop: '1px solid #f3f4f6', padding: '16px 24px 24px', maxHeight: '80vh', overflowY: 'auto' }}>
+          <div style={{ backgroundColor: 'white', borderTop: '1px solid #f3f4f6', padding: '16px 24px 32px', maxHeight: '85vh', overflowY: 'auto' }}>
             {menus.map(m => (
               <div key={m.id} style={{ marginBottom: '20px' }}>
-                <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', margin: '0 0 8px' }}>{m.label}</p>
+                <p style={{ fontSize: '10px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '1.5px', margin: '0 0 8px', fontWeight: 600 }}>{m.label}</p>
                 {m.items ? m.items.map(item => (
                   <a key={item.label} href={item.href}
-                    style={{ display: 'block', fontSize: '14px', color: '#374151', textDecoration: 'none', padding: '7px 0', borderBottom: '1px solid #f9fafb' }}>
+                    style={{ display: 'block', fontSize: '14px', color: '#374151', textDecoration: 'none', padding: '8px 0', borderBottom: '1px solid #f9fafb' }}>
                     {item.label}
                   </a>
                 )) : (
-                  <a href={m.href} style={{ display: 'block', fontSize: '14px', color: '#374151', textDecoration: 'none', padding: '7px 0' }}>{m.label}</a>
+                  <a href={m.href} style={{ display: 'block', fontSize: '14px', color: '#374151', textDecoration: 'none', padding: '8px 0' }}>{m.label}</a>
                 )}
               </div>
             ))}
-            <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
-              <button onClick={() => handleLang('en')} style={{ flex: 1, padding: '8px', fontSize: '12px', border: lang === 'en' ? '2px solid black' : '1px solid #e5e7eb', background: 'none', cursor: 'pointer' }}>🇬🇧 EN</button>
-              <button onClick={() => handleLang('id')} style={{ flex: 1, padding: '8px', fontSize: '12px', border: lang === 'id' ? '2px solid black' : '1px solid #e5e7eb', background: 'none', cursor: 'pointer' }}>🇮🇩 ID</button>
-              <button onClick={() => handleCurrency('IDR')} style={{ flex: 1, padding: '8px', fontSize: '12px', border: currency === 'IDR' ? '2px solid black' : '1px solid #e5e7eb', background: 'none', cursor: 'pointer' }}>IDR</button>
-              <button onClick={() => handleCurrency('USD')} style={{ flex: 1, padding: '8px', fontSize: '12px', border: currency === 'USD' ? '2px solid black' : '1px solid #e5e7eb', background: 'none', cursor: 'pointer' }}>USD</button>
+            <div style={{ display: 'flex', gap: '8px', marginTop: '16px', flexWrap: 'wrap' }}>
+              <button onClick={() => handleLang('en')}
+                style={{ flex: 1, padding: '8px', fontSize: '13px', border: lang === 'en' ? '2px solid black' : '1px solid #e5e7eb', background: lang === 'en' ? 'black' : 'white', color: lang === 'en' ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
+                🇬🇧 EN
+              </button>
+              <button onClick={() => handleLang('id')}
+                style={{ flex: 1, padding: '8px', fontSize: '13px', border: lang === 'id' ? '2px solid black' : '1px solid #e5e7eb', background: lang === 'id' ? 'black' : 'white', color: lang === 'id' ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
+                🇮🇩 ID
+              </button>
+              <button onClick={() => handleCurrency('IDR')}
+                style={{ flex: 1, padding: '8px', fontSize: '13px', border: currency === 'IDR' ? '2px solid black' : '1px solid #e5e7eb', background: currency === 'IDR' ? 'black' : 'white', color: currency === 'IDR' ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
+                IDR
+              </button>
+              <button onClick={() => handleCurrency('USD')}
+                style={{ flex: 1, padding: '8px', fontSize: '13px', border: currency === 'USD' ? '2px solid black' : '1px solid #e5e7eb', background: currency === 'USD' ? 'black' : 'white', color: currency === 'USD' ? 'white' : '#374151', cursor: 'pointer', minWidth: '60px' }}>
+                USD
+              </button>
             </div>
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', backgroundColor: 'black', color: 'white', textAlign: 'center', padding: '13px', fontSize: '14px', textDecoration: 'none', marginTop: '16px', fontWeight: 600 }}>
