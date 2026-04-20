@@ -35,15 +35,51 @@ export default async function Home({ searchParams }) {
         <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '40px', lineHeight: 1.2 }}>
           The smart way to invest <strong>in Bali real estate</strong>
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '32px' }}>
           {[
-            { title: 'Curated Listings', desc: 'Every property is hand-selected and verified by our local team. No fake listings, no hidden surprises.' },
-            { title: 'Legal Assistance', desc: 'We guide you through Indonesian property law, leasehold & freehold structures, and notary processes.' },
-            { title: 'Direct WhatsApp', desc: 'Skip the forms. Connect directly with our agents on WhatsApp for fast, personal responses.' },
+            {
+              eyebrow: 'Legal Integrity',
+              title: 'Uncompromising Legal Security',
+              desc: "Navigating property laws shouldn't be stressful. We handle the complexities so you don't have to.",
+              bullets: [
+                { strong: 'Rigorous Due Diligence:', text: ' Comprehensive verification of permits (PBG/SLF) and land zoning.' },
+                { strong: 'Safe Structures:', text: ' Expert guidance on Leasehold and Freehold ownership.' },
+                { strong: 'Trusted Network:', text: ' Direct coordination with reputable public notaries for a secure transaction.' },
+              ],
+            },
+            {
+              eyebrow: 'Curated Portfolio',
+              title: 'Selection Over Collection',
+              desc: 'We prioritize quality over quantity, focusing only on properties that promise real value.',
+              bullets: [
+                { strong: 'Hand-Selected Units:', text: ' Every villa is vetted for architectural integrity and prime location.' },
+                { strong: 'Market-Ready Designs:', text: ' We list properties designed to perform in Bali\u2019s competitive rental market.' },
+                { strong: 'High-Yield Focus:', text: ' Only the best-performing assets in high-demand areas make it to our list.' },
+              ],
+            },
+            {
+              eyebrow: 'Seamless Management',
+              title: 'Investment Without the Stress',
+              desc: 'Our partnership continues long after the keys are handed over.',
+              bullets: [
+                { strong: 'End-to-End Service:', text: ' A smooth transition from property buyer to profitable landlord.' },
+                { strong: 'Professional Oversight:', text: ' Full management including aggressive marketing and guest relations.' },
+                { strong: 'Passive Income:', text: ' We handle the daily operations and maintenance while you enjoy the returns.' },
+              ],
+            },
           ].map(f => (
             <div key={f.title} style={{ borderTop: '1px solid #e5e7eb', paddingTop: '24px' }}>
-              <h3 style={{ fontWeight: 600, marginBottom: '12px', fontSize: '15px' }}>{f.title}</h3>
-              <p style={{ fontSize: '14px', color: '#6b7280', lineHeight: 1.7 }}>{f.desc}</p>
+              <p style={{ fontSize: '10px', letterSpacing: '2px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '10px', fontWeight: 600 }}>{f.eyebrow}</p>
+              <h3 style={{ fontWeight: 600, marginBottom: '12px', fontSize: '17px', lineHeight: 1.3 }}>{f.title}</h3>
+              <p style={{ fontSize: '14px', color: '#6b7280', lineHeight: 1.7, marginBottom: '16px' }}>{f.desc}</p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {f.bullets.map(b => (
+                  <li key={b.strong} style={{ fontSize: '13px', color: '#374151', lineHeight: 1.6, paddingLeft: '14px', position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: 0, top: 0, color: '#9ca3af' }}>•</span>
+                    <strong style={{ fontWeight: 600, color: '#111827' }}>{b.strong}</strong>{b.text}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
