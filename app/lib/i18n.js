@@ -69,7 +69,7 @@ export const translations = {
     'Freehold': 'Freehold',
     'Yearly': 'Sewa Tahunan',
     'Yearly Rent': 'Sewa Tahunan',
-    'Beds': 'Kamar',
+    'Beds': 'KT',
     'Baths': 'KM',
     'Building': 'Bangunan',
     'Gross Yield': 'Gross Yield',
