@@ -113,7 +113,7 @@ export default async function Home({ searchParams }) {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>Areas We Cover</p>
           <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '32px' }}>Popular <strong>Locations</strong></h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
+          <div className="gbp-areas-grid">
             {['Canggu', 'Seminyak', 'Ubud', 'Jimbaran', 'Uluwatu', 'Sanur', 'Pererenan', 'Kerobokan'].map(loc => (
               <a key={loc} href={'/properties?location=' + loc} style={{
                 backgroundColor: 'white', border: '1px solid #e5e7eb', padding: 'clamp(14px, 2vw, 20px) clamp(12px, 2vw, 16px)',
