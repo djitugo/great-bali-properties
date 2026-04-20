@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useT, useLang } from '../../lib/i18n'
+import { SITE_WA } from '../../lib/site'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -317,7 +318,7 @@ export default function RoiClient() {
             {c.cta.desc}
           </motion.p>
           <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="https://wa.me/6282122973363" target="_blank" rel="noopener noreferrer"
+            <a href={`https://wa.me/${SITE_WA}`} target="_blank" rel="noopener noreferrer"
               style={{ backgroundColor: 'white', color: 'black', fontSize: '14px', fontWeight: 600, padding: '14px 32px', textDecoration: 'none' }}>
               {t('WhatsApp Us')}
             </a>

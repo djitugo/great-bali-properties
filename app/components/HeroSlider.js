@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useT } from '../lib/i18n'
+import { SITE_WA } from '../lib/site'
 
 const slides = [
   { url: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1800&q=80', label: 'Bali Temple' },
@@ -10,6 +12,7 @@ const slides = [
 ]
 
 export default function HeroSlider() {
+  const t = useT()
   const [current, setCurrent] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -48,28 +51,28 @@ export default function HeroSlider() {
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           style={{ fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', marginBottom: '20px' }}>
-          Premium Bali Real Estate
+          {t('Premium Bali Real Estate')}
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
           style={{ fontSize: isMobile ? '36px' : '64px', fontWeight: 300, lineHeight: 1.1, color: 'white', margin: '0 0 16px', letterSpacing: '-0.5px', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
-          Find Your <span style={{ fontWeight: 700 }}>Dream Villa</span> in Bali
+          {t('Find Your')} <span style={{ fontWeight: 700 }}>{t('Dream Villa')}</span> {t('in Bali')}
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
           style={{ color: 'rgba(255,255,255,0.75)', fontSize: isMobile ? '14px' : '17px', marginBottom: '32px', lineHeight: 1.5, whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
-          Curated villas and land across Bali's most sought-after locations. Trusted by investors worldwide.
+          {t("Curated villas and land across Bali's most sought-after locations. Trusted by investors worldwide.")}
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
           style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#listings" style={{ backgroundColor: 'white', color: 'black', fontSize: '13px', padding: '13px 28px', textDecoration: 'none', fontWeight: 600 }}>View Listings</a>
-          <a href="https://wa.me/6282122973363" target="_blank" rel="noopener noreferrer"
+          <a href="#listings" style={{ backgroundColor: 'white', color: 'black', fontSize: '13px', padding: '13px 28px', textDecoration: 'none', fontWeight: 600 }}>{t('View Listings')}</a>
+          <a href={`https://wa.me/${SITE_WA}`} target="_blank" rel="noopener noreferrer"
             style={{ border: '1.5px solid rgba(255,255,255,0.7)', color: 'white', fontSize: '13px', padding: '13px 28px', textDecoration: 'none' }}>
-            Contact Agent
+            {t('Contact Agent')}
           </a>
         </motion.div>
 
@@ -79,7 +82,7 @@ export default function HeroSlider() {
           {[{ n: '50+', l: 'Properties' }, { n: '10+', l: 'Years Exp' }, { n: '1000+', l: 'Managed' }].map(s => (
             <div key={s.l} style={{ textAlign: 'center' }}>
               <div style={{ fontSize: isMobile ? '28px' : '40px', fontWeight: 300, color: 'white', lineHeight: 1 }}>{s.n}</div>
-              <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '2px', marginTop: '6px' }}>{s.l}</div>
+              <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '2px', marginTop: '6px' }}>{t(s.l)}</div>
             </div>
           ))}
         </motion.div>
