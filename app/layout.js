@@ -1,6 +1,8 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import LoadingScreen from './components/LoadingScreen'
 import { LangProvider } from './lib/i18n'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -97,9 +99,17 @@ export default function RootLayout({ children }) {
       name: 'Bali, Indonesia',
     },
     sameAs: [],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Jln Bukit Sari Utara No.88X, Padangsambian Kaja',
+      addressLocality: 'Denpasar Barat',
+      addressRegion: 'Bali',
+      postalCode: '80117',
+      addressCountry: 'ID',
+    },
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+62-812-3456-7890',
+      telephone: '+62-821-2297-3363',
       contactType: 'sales',
       areaServed: 'ID',
       availableLanguage: ['English', 'Indonesian'],
@@ -132,8 +142,10 @@ export default function RootLayout({ children }) {
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: 'Inter, sans-serif' }}>
         <LangProvider>
+          <LoadingScreen />
           <Navbar />
           {children}
+          <Footer />
         </LangProvider>
       </body>
     </html>

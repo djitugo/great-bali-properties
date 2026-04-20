@@ -1,10 +1,14 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useT, useLang } from '../lib/i18n'
+import { waLinkFor } from '../lib/site'
 
 const USD_RATE = 0.000062
 
 export default function PropertyCard({ property }) {
+  const t = useT()
+  const { lang } = useLang()
   const [currency, setCurrency] = useState('IDR')
   const [imgIndex, setImgIndex] = useState(0)
   const [direction, setDirection] = useState(1)
@@ -31,9 +35,8 @@ export default function PropertyCard({ property }) {
 
   const images = property.images ? property.images.split(',').map(s => s.trim()).filter(Boolean) : []
   const hasMultiple = images.length > 1
-  const typeLabel = { leasehold: 'Leasehold', freehold: 'Freehold', yearly: 'Yearly' }
-  const waMessage = encodeURIComponent('Hi, I am interested in ' + property.title)
-  const waLink = 'https://wa.me/' + property.whatsapp + '?text=' + waMessage
+  const typeLabel = { leasehold: t('Leasehold'), freehold: t('Freehold'), yearly: t('Yearly') }
+  const waLink = waLinkFor(property.title, lang, property.whatsapp)
 
   const goTo = (newIndex, dir) => {
     setDirection(dir)
@@ -79,10 +82,10 @@ export default function PropertyCard({ property }) {
         {/* Badges */}
         <div style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', gap: '6px', zIndex: 2 }}>
           <span style={{ backgroundColor: 'white', color: 'black', fontSize: '11px', padding: '4px 10px', fontWeight: 600 }}>
-            {property.status === 'for_sale' ? 'For Sale' : 'For Rent'}
+            {property.status === 'for_sale' ? t('For Sale') : t('For Rent')}
           </span>
           {property.featured && (
-            <span style={{ backgroundColor: 'black', color: 'white', fontSize: '11px', padding: '4px 10px', fontWeight: 600 }}>Featured</span>
+            <span style={{ backgroundColor: 'black', color: 'white', fontSize: '11px', padding: '4px 10px', fontWeight: 600 }}>{t('Featured')}</span>
           )}
         </div>
 
@@ -115,23 +118,23 @@ export default function PropertyCard({ property }) {
         <p style={{ fontSize: '11px', color: '#9ca3af', marginBottom: '5px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{property.location}, Bali</p>
         <h3 style={{ fontWeight: 500, fontSize: '14px', lineHeight: 1.45, marginBottom: '12px', color: 'black' }}>{property.title}</h3>
         <div style={{ display: 'flex', gap: '14px', fontSize: '12px', color: '#9ca3af', marginBottom: '14px', flexWrap: 'wrap' }}>
-          {property.bedrooms > 0 && <span>{property.bedrooms} Beds</span>}
-          {property.bathrooms > 0 && <span>{property.bathrooms} Baths</span>}
-          {property.land_size > 0 && <span>{property.land_size} sqm</span>}
+          {property.bedrooms > 0 && <span>{property.bedrooms} {t('Beds')}</span>}
+          {property.bathrooms > 0 && <span>{property.bathrooms} {t('Baths')}</span>}
+          {property.land_size > 0 && <span>{property.land_size} {t('sqm')}</span>}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div>
             <p style={{ fontWeight: 700, fontSize: '16px', color: 'black', marginBottom: '2px' }}>{formatPrice(property.price)}</p>
             <p style={{ fontSize: '11px', color: '#9ca3af' }}>{typeLabel[property.price_type] || property.price_type}</p>
           </div>
-          <span style={{ fontSize: '12px', border: '1px solid #e5e7eb', padding: '6px 14px', color: '#374151' }}>View →</span>
+          <span style={{ fontSize: '12px', border: '1px solid #e5e7eb', padding: '6px 14px', color: '#374151' }}>{t('View →')}</span>
         </div>
       </a>
 
       <div style={{ padding: '0 16px 16px' }}>
         <a href={waLink} target="_blank" rel="noopener noreferrer"
           style={{ display: 'block', textAlign: 'center', border: '1px solid #e5e7eb', color: '#6b7280', fontSize: '12px', padding: '9px', textDecoration: 'none' }}>
-          WhatsApp Inquiry
+          {t('WhatsApp Inquiry')}
         </a>
       </div>
     </div>

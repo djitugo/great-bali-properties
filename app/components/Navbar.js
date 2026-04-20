@@ -196,7 +196,7 @@ export default function Navbar() {
             </div>
 
             {/* WhatsApp */}
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+            <a href="https://wa.me/6282122973363" target="_blank" rel="noopener noreferrer"
               style={{ marginLeft: '8px', backgroundColor: 'black', color: 'white', padding: '8px 16px', fontSize: '13px', fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>
               {t('WhatsApp')}
             </a>
@@ -259,7 +259,7 @@ export default function Navbar() {
                 </button>
               ))}
             </div>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+            <a href="https://wa.me/6282122973363" target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', backgroundColor: 'black', color: 'white', textAlign: 'center', padding: '13px', fontSize: '14px', textDecoration: 'none', marginTop: '16px', fontWeight: 600 }}>
               {t('WhatsApp Us')}
             </a>
@@ -268,7 +268,7 @@ export default function Navbar() {
       </nav>
 
       {/* Floating WhatsApp */}
-      <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+      <a href="https://wa.me/6282122973363" target="_blank" rel="noopener noreferrer"
         aria-label="WhatsApp"
         style={{
           position: 'fixed', bottom: '24px', right: '24px', zIndex: 9998,

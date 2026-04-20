@@ -3,3 +3,17 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+
+/* Areas grid: mobile = 2 kolom, tablet dan desktop = 4 kolom.
+   Dipakai di homepage section "Areas We Cover" dan di mana pun daftar lokasi
+   perlu tampil dengan breakpoint yang sama. */
+.gbp-areas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .gbp-areas-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

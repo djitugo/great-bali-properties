@@ -2,6 +2,17 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useT, useLang } from '../lib/i18n'
+import {
+  SITE_WA,
+  SITE_WA_DISPLAY,
+  SITE_EMAIL,
+  SITE_ADDRESS_LINES,
+  SITE_ADDRESS_ONELINE,
+  SITE_MAP_URL,
+  SITE_MAP_EMBED,
+  SITE_HOURS,
+  SITE_HOURS_SHORT,
+} from '../lib/site'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -18,30 +29,30 @@ const content = {
     methods: [
       {
         label: 'WhatsApp (Fastest)',
-        value: '+62 812-3456-7890',
+        value: SITE_WA_DISPLAY,
         sub: 'Usually responds in minutes',
-        href: 'https://wa.me/6281234567890',
+        href: `https://wa.me/${SITE_WA}`,
         external: true,
         icon: '💬',
       },
       {
         label: 'Email',
-        value: 'info@greatbaliproperties.com',
+        value: SITE_EMAIL,
         sub: 'Response within 24 hours',
-        href: 'mailto:info@greatbaliproperties.com',
+        href: `mailto:${SITE_EMAIL}`,
         icon: '✉️',
       },
       {
         label: 'Office',
-        value: 'Jl. Pantai Batu Bolong No. 88, Canggu, Bali',
-        sub: 'Open Monday to Saturday',
-        href: 'https://maps.google.com/?q=Jl.+Pantai+Batu+Bolong+Canggu',
+        value: SITE_ADDRESS_ONELINE,
+        sub: SITE_HOURS_SHORT.en,
+        href: SITE_MAP_URL,
         external: true,
         icon: '📍',
       },
     ],
     faqs: [
-      { q: 'How fast will you respond?', a: 'WhatsApp within minutes during working hours (9am–7pm Bali time, Mon–Sat). Email within 24 hours, seven days a week. Form submissions get a personal reply — not an auto-responder.' },
+      { q: 'How fast will you respond?', a: 'WhatsApp within minutes during working hours (9am–6pm Bali time, Mon–Fri). Email within 24 hours, seven days a week. Form submissions get a personal reply — not an auto-responder.' },
       { q: 'Do I need an appointment to visit the office?', a: 'Walk-ins are welcome, but we recommend booking 1–2 hours ahead on WhatsApp. This gives us time to prepare a shortlist of listings that match your brief, saving you a generic tour.' },
       { q: 'Can we do everything remotely if I\'m not in Bali?', a: 'Yes. We regularly handle the full process remotely — video property tours, digital due diligence packs, notary coordination, and escrow setup. Many buyers only travel to Bali for the final signing.' },
       { q: 'Do you charge buyers a fee?', a: 'No. Our commission is paid by the seller on successful completion. Our advice, listings, area briefings, and due diligence coordination are free to you as a buyer. You only pay the standard notary and government fees on completion.' },
@@ -52,24 +63,24 @@ const content = {
     methods: [
       {
         label: 'WhatsApp (Tercepat)',
-        value: '+62 812-3456-7890',
+        value: SITE_WA_DISPLAY,
         sub: 'Biasanya balas dalam beberapa menit',
-        href: 'https://wa.me/6281234567890',
+        href: `https://wa.me/${SITE_WA}`,
         external: true,
         icon: '💬',
       },
       {
         label: 'Email',
-        value: 'info@greatbaliproperties.com',
+        value: SITE_EMAIL,
         sub: 'Balas dalam 24 jam',
-        href: 'mailto:info@greatbaliproperties.com',
+        href: `mailto:${SITE_EMAIL}`,
         icon: '✉️',
       },
       {
         label: 'Kantor',
-        value: 'Jl. Pantai Batu Bolong No. 88, Canggu, Bali',
-        sub: 'Buka Senin–Sabtu',
-        href: 'https://maps.google.com/?q=Jl.+Pantai+Batu+Bolong+Canggu',
+        value: SITE_ADDRESS_ONELINE,
+        sub: SITE_HOURS_SHORT.id,
+        href: SITE_MAP_URL,
         external: true,
         icon: '📍',
       },
@@ -119,7 +130,7 @@ export default function ContactClient() {
       `WA: ${encodeURIComponent(form.phone || '-')}%0A` +
       `Minat: ${encodeURIComponent(form.interest || '-')}%0A%0A` +
       `${encodeURIComponent(form.message || '')}`
-    window.open(`https://wa.me/6281234567890?text=${text}`, '_blank')
+    window.open(`https://wa.me/6282122973363?text=${text}`, '_blank')
     setSent(true)
   }
 
@@ -262,13 +273,13 @@ export default function ContactClient() {
             {t('Find Us')}
           </motion.p>
           <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '32px' }}>
-            {lang === 'id' ? 'Kantor kami di Canggu' : 'Our office in Canggu'}
+            {lang === 'id' ? 'Kantor kami di Denpasar' : 'Our office in Denpasar'}
           </motion.h2>
           <motion.div variants={fadeUp} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
             <div style={{ border: '1px solid #e5e7eb', overflow: 'hidden', minHeight: '320px', position: 'relative', backgroundColor: '#f9fafb' }}>
               <iframe
                 title="Great Bali Properties Office"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.5!2d115.1355!3d-8.6502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMzknMDAuNyJTIDExNcKwMDgnMDcuOCJF!5e0!3m2!1sen!2sid!4v1700000000000"
+                src={SITE_MAP_EMBED}
                 width="100%" height="100%" style={{ border: 0, position: 'absolute', inset: 0 }}
                 allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
             </div>
@@ -278,9 +289,11 @@ export default function ContactClient() {
                   {lang === 'id' ? 'Alamat' : 'Address'}
                 </p>
                 <p style={{ fontSize: '15px', color: 'black', lineHeight: 1.7 }}>
-                  Jl. Pantai Batu Bolong No. 88<br />
-                  Canggu, Kuta Utara<br />
-                  Badung, Bali 80351
+                  {SITE_ADDRESS_LINES.map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}{i < SITE_ADDRESS_LINES.length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
                 </p>
               </div>
               <div style={{ marginBottom: '24px' }}>
@@ -288,12 +301,14 @@ export default function ContactClient() {
                   {lang === 'id' ? 'Jam Buka' : 'Hours'}
                 </p>
                 <p style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.9 }}>
-                  {lang === 'id' ? 'Senin–Jumat: 09.00–19.00' : 'Monday–Friday: 9:00am–7:00pm'}<br />
-                  {lang === 'id' ? 'Sabtu: 10.00–17.00' : 'Saturday: 10:00am–5:00pm'}<br />
-                  {lang === 'id' ? 'Minggu: tutup (WhatsApp tetap aktif)' : 'Sunday: closed (WhatsApp still active)'}
+                  {(SITE_HOURS[lang] || SITE_HOURS.en).map((h, i) => (
+                    <React.Fragment key={i}>
+                      {h.days}: {h.time}{i < (SITE_HOURS[lang] || SITE_HOURS.en).length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
                 </p>
               </div>
-              <a href="https://maps.google.com/?q=Jl.+Pantai+Batu+Bolong+Canggu" target="_blank" rel="noopener noreferrer"
+              <a href={SITE_MAP_URL} target="_blank" rel="noopener noreferrer"
                 style={{ display: 'inline-block', fontSize: '13px', color: 'black', fontWeight: 600, textDecoration: 'none', borderBottom: '1px solid black', paddingBottom: '2px' }}>
                 {lang === 'id' ? 'Buka di Google Maps →' : 'Open in Google Maps →'}
               </a>
@@ -320,36 +335,6 @@ export default function ContactClient() {
         </div>
       </div>
 
-      {/* FOOTER */}
-      <footer style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(32px, 5vw, 48px) clamp(20px, 5vw, 48px)', backgroundColor: 'white' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '32px' }}>
-          <div>
-            <p translate="no" style={{ fontWeight: 700, marginBottom: '8px', fontSize: '15px' }}>Great Bali Properties</p>
-            <p style={{ fontSize: '13px', color: '#9ca3af', lineHeight: 1.7 }}>{t('Premium villa and land listings across Bali. A proud partner of Great Bali Villas.')}</p>
-          </div>
-          <div>
-            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>{t('Bali Guides')}</p>
-            {[['Why Invest in Bali', '/guide'], ['Best Areas to Buy', '/guide/areas'], ['Leasehold vs Freehold', '/guide/ownership'], ['Legal Process', '/guide/legal'], ['Rental Yields & ROI', '/guide/roi']].map(([label, href]) => (
-              <a key={label} href={href} style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>{t(label)}</a>
-            ))}
-          </div>
-          <div>
-            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>{t('Properties')}</p>
-            <a href="/properties" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>{t('All Properties')}</a>
-            <a href="/properties?type=villa" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>{t('Villas')}</a>
-            <a href="/properties?type=land" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none' }}>{t('Land')}</a>
-          </div>
-          <div>
-            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>{t('Contact')}</p>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>{t('WhatsApp')}</a>
-            <p style={{ fontSize: '13px', color: '#6b7280' }}>info@greatbaliproperties.com</p>
-          </div>
-        </div>
-        <div style={{ borderTop: '1px solid #f3f4f6', marginTop: '32px', paddingTop: '20px', textAlign: 'center' }}>
-          <p style={{ fontSize: '12px', color: '#d1d5db' }}>© 2025 <span translate="no">Great Bali Properties</span>. {t('All rights reserved.')}</p>
-        </div>
-      </footer>
     </main>
   )
 }

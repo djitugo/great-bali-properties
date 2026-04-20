@@ -317,13 +317,6 @@ export default function PropertyDetailClient({ property: p, related }) {
         </div>
       )}
 
-      {/* Footer */}
-      <footer style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(32px, 5vw, 48px) clamp(20px, 5vw, 48px)', backgroundColor: 'white' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontSize: '12px', color: '#d1d5db' }}>© 2025 Great Bali Properties. All rights reserved.</p>
-        </div>
-      </footer>
-
       <style>{`
         @media (min-width: 900px) {
           .detail-grid { grid-template-columns: minmax(0, 1fr) 300px !important; }

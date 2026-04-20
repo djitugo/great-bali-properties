@@ -67,7 +67,7 @@ export default function HeroSlider() {
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
           style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="#listings" style={{ backgroundColor: 'white', color: 'black', fontSize: '13px', padding: '13px 28px', textDecoration: 'none', fontWeight: 600 }}>View Listings</a>
-          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+          <a href="https://wa.me/6282122973363" target="_blank" rel="noopener noreferrer"
             style={{ border: '1.5px solid rgba(255,255,255,0.7)', color: 'white', fontSize: '13px', padding: '13px 28px', textDecoration: 'none' }}>
             Contact Agent
           </a>

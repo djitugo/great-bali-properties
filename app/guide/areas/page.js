@@ -450,7 +450,7 @@ export default function BestAreasPage() {
             Share your goals and budget — we'll recommend the 2–3 areas that best match your profile, with real listings to compare.
           </motion.p>
           <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+            <a href="https://wa.me/6282122973363" target="_blank" rel="noopener noreferrer"
               style={{ backgroundColor: 'white', color: 'black', fontSize: '14px', fontWeight: 600, padding: '14px 32px', textDecoration: 'none' }}>
               WhatsApp Us
             </a>
@@ -462,42 +462,6 @@ export default function BestAreasPage() {
         </motion.div>
       </div>
 
-      {/* FOOTER */}
-      <footer style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(32px, 5vw, 48px) clamp(20px, 5vw, 48px)', backgroundColor: 'white' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '32px' }}>
-          <div>
-            <p style={{ fontWeight: 700, marginBottom: '8px', fontSize: '15px' }}>Great Bali Properties</p>
-            <p style={{ fontSize: '13px', color: '#9ca3af', lineHeight: 1.7 }}>Premium villa and land listings across Bali. A proud partner of Great Bali Villas.</p>
-          </div>
-          <div>
-            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>Bali Guides</p>
-            {[
-              ['Why Invest in Bali', '/guide'],
-              ['Best Areas to Buy', '/guide/areas'],
-              ['Leasehold vs Freehold', '/guide/ownership'],
-              ['Legal Process', '/guide/legal'],
-              ['ROI & Yields', '/guide/roi'],
-            ].map(([label, href]) => (
-              <a key={label} href={href} style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>{label}</a>
-            ))}
-          </div>
-          <div>
-            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>Properties</p>
-            <a href="/properties" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>All Properties</a>
-            <a href="/properties?type=villa" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>Villas</a>
-            <a href="/properties?type=land" style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none' }}>Land</a>
-          </div>
-          <div>
-            <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>Contact</p>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'block', fontSize: '13px', color: '#6b7280', textDecoration: 'none', marginBottom: '6px' }}>WhatsApp</a>
-            <p style={{ fontSize: '13px', color: '#6b7280' }}>info@greatbaliproperties.com</p>
-          </div>
-        </div>
-        <div style={{ borderTop: '1px solid #f3f4f6', marginTop: '32px', paddingTop: '20px', textAlign: 'center' }}>
-          <p style={{ fontSize: '12px', color: '#d1d5db' }}>© 2025 Great Bali Properties. All rights reserved.</p>
-        </div>
-      </footer>
 
     </main>
   )

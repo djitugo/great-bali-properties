@@ -36,7 +36,7 @@ export default function HeroSection() {
           <a href="#listings" style={{ backgroundColor: 'white', color: 'black', fontSize: '14px', padding: '14px 32px', textDecoration: 'none', fontWeight: 600 }}>
             View Listings
           </a>
-          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+          <a href="https://wa.me/6282122973363" target="_blank" rel="noopener noreferrer"
             style={{ border: '1.5px solid rgba(255,255,255,0.6)', color: 'white', fontSize: '14px', padding: '14px 32px', textDecoration: 'none' }}>
             Contact Agent
           </a>

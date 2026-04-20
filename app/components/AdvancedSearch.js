@@ -1,11 +1,13 @@
 'use client'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
+import { useT } from '../lib/i18n'
 
 const MAX_IDR = 10000000000
 const USD_RATE = 0.000062
 
 export default function AdvancedSearch() {
+  const t = useT()
   const router = useRouter()
   const searchParams = useSearchParams()
   const minRef = useRef(null)
@@ -89,52 +91,52 @@ export default function AdvancedSearch() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', alignItems: 'end' }}>
         <div>
-          <label style={lbl}>Location</label>
+          <label style={lbl}>{t('Location')}</label>
           <select value={location} onChange={e => setLocation(e.target.value)} style={sel}>
-            <option value="">All Locations</option>
+            <option value="">{t('All Locations')}</option>
             {['Canggu','Seminyak','Ubud','Jimbaran','Uluwatu','Sanur','Pererenan','Kerobokan'].map(l => (
               <option key={l} value={l}>{l}</option>
             ))}
           </select>
         </div>
         <div>
-          <label style={lbl}>Type</label>
+          <label style={lbl}>{t('Type')}</label>
           <select value={type} onChange={e => setType(e.target.value)} style={sel}>
-            <option value="">All Types</option>
-            <option value="villa">Villa</option>
-            <option value="land">Land</option>
-            <option value="commercial">Commercial</option>
+            <option value="">{t('All Types')}</option>
+            <option value="villa">{t('Villa')}</option>
+            <option value="land">{t('Land')}</option>
+            <option value="commercial">{t('Commercial')}</option>
           </select>
         </div>
         <div>
-          <label style={lbl}>Status</label>
+          <label style={lbl}>{t('Status')}</label>
           <select value={status} onChange={e => setStatus(e.target.value)} style={sel}>
-            <option value="">For Sale & Rent</option>
-            <option value="for_sale">For Sale</option>
-            <option value="for_rent">For Rent</option>
+            <option value="">{t('For Sale & Rent')}</option>
+            <option value="for_sale">{t('For Sale')}</option>
+            <option value="for_rent">{t('For Rent')}</option>
           </select>
         </div>
         <div>
-          <label style={lbl}>Ownership</label>
+          <label style={lbl}>{t('Ownership')}</label>
           <select value={priceType} onChange={e => setPriceType(e.target.value)} style={sel}>
-            <option value="">All</option>
-            <option value="freehold">Freehold</option>
-            <option value="leasehold">Leasehold</option>
+            <option value="">{t('All')}</option>
+            <option value="freehold">{t('Freehold')}</option>
+            <option value="leasehold">{t('Leasehold')}</option>
           </select>
         </div>
         <button onClick={handleSearch}
           style={{ backgroundColor: 'black', color: 'white', padding: '10px 16px', fontSize: '13px', fontWeight: 600, border: 'none', cursor: 'pointer', height: '42px' }}>
-          Search
+          {t('Search')}
         </button>
         <button onClick={handleReset}
           style={{ backgroundColor: 'white', color: '#6b7280', padding: '10px 16px', fontSize: '13px', border: '1px solid #e5e7eb', cursor: 'pointer', height: '42px' }}>
-          Reset
+          {t('Reset')}
         </button>
       </div>
 
       <button onClick={() => setShowAdvanced(!showAdvanced)}
         style={{ marginTop: '12px', background: 'none', border: 'none', fontSize: '12px', color: '#6b7280', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', gap: '4px' }}>
-        {showAdvanced ? '▲' : '▼'} Advanced Filters
+        {showAdvanced ? '▲' : '▼'} {t('Advanced Filters')}
       </button>
 
       {showAdvanced && (
@@ -143,9 +145,9 @@ export default function AdvancedSearch() {
           {/* Price Range Slider */}
           <div style={{ marginBottom: '24px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <label style={lbl}>Price Range</label>
+              <label style={lbl}>{t('Price Range')}</label>
               <span style={{ fontSize: '12px', color: '#374151', fontWeight: 600 }}>
-                {formatLabel(minPrice)} — {maxPrice >= MAX_IDR ? 'No limit' : formatLabel(maxPrice)}
+                {formatLabel(minPrice)} — {maxPrice >= MAX_IDR ? t('No limit') : formatLabel(maxPrice)}
               </span>
             </div>
 
@@ -214,7 +216,7 @@ export default function AdvancedSearch() {
 
           {/* Bedrooms */}
           <div>
-            <label style={lbl}>Min Bedrooms</label>
+            <label style={lbl}>{t('Min Bedrooms')}</label>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {['Any', '1', '2', '3', '4', '5+'].map(b => (
                 <button key={b} onClick={() => setBedrooms(b === 'Any' ? '' : b.replace('+', ''))}
@@ -223,7 +225,7 @@ export default function AdvancedSearch() {
                     backgroundColor: (b === 'Any' && !bedrooms) || bedrooms === b.replace('+', '') ? 'black' : 'white',
                     color: (b === 'Any' && !bedrooms) || bedrooms === b.replace('+', '') ? 'white' : '#374151',
                   }}>
-                  {b}
+                  {b === 'Any' ? t('Any') : b}
                 </button>
               ))}
             </div>

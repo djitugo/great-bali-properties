@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { useT } from '../lib/i18n'
 
 const LOCATION_COORDS = {
   'Canggu':    { lat: -8.6478, lng: 115.1385 },
@@ -15,6 +16,7 @@ const LOCATION_COORDS = {
 const USD_RATE = 0.000062
 
 export default function PropertiesMap({ properties }) {
+  const t = useT()
   const mapRef = useRef(null)
   const mapInstance = useRef(null)
   const markersRef = useRef([])
@@ -197,7 +199,7 @@ export default function PropertiesMap({ properties }) {
                 fontSize: '12px', fontWeight: 600,
                 padding: '9px', textDecoration: 'none'
               }}>
-              View Property →
+              {t('View Property →')}
             </a>
           </div>
         </div>
@@ -210,7 +212,7 @@ export default function PropertiesMap({ properties }) {
         fontSize: '12px', fontWeight: 600, color: '#374151',
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)', zIndex: 999
       }}>
-        {properties.length} {properties.length === 1 ? 'Property' : 'Properties'}
+        {properties.length} {t(properties.length === 1 ? 'Property' : 'Properties')}
       </div>
 
       <style>{`
