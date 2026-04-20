@@ -106,7 +106,7 @@ export function PopularLocations() {
               textDecoration: 'none', color: 'black', display: 'block'
             }}>
               <p style={{ fontWeight: 500, fontSize: 'clamp(12px, 1.5vw, 14px)' }}>{loc}</p>
-              <p style={{ fontSize: '11px', color: '#9ca3af', marginTop: '3px' }}>Bali</p>
+              <p style={{ fontSize: '11px', color: '#9ca3af', marginTop: '3px' }}>{t('Bali')}</p>
             </a>
           ))}
         </div>
