@@ -11,8 +11,7 @@ function buildMenus(t) {
         { label: t('All Properties'), href: '/properties' },
         { label: t('Villas for Sale'), href: '/properties?type=villa&status=for_sale' },
         { label: t('Land for Sale'), href: '/properties?type=land&status=for_sale' },
-        { label: t('Villas for Rent'), href: '/properties?type=villa&status=for_rent' },
-        { label: t('Featured Properties'), href: '/properties?featured=true' },
+        { label: t('Leasehold'), href: '/properties?price_type=leasehold' },
       ]
     },
     { id: 'about', label: t('About'), href: '/about' },
