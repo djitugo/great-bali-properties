@@ -1,6 +1,9 @@
 'use client'
 import { useT } from '../lib/i18n'
 import { SITE_WA } from '../lib/site'
+import dynamic from 'next/dynamic'
+
+const BaliLocationsMap = dynamic(() => import('./BaliLocationsMap'), { ssr: false })
 
 export function WhyChooseUsSection() {
   const t = useT()
@@ -97,16 +100,26 @@ export function PopularLocations() {
   return (
     <div style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)', backgroundColor: '#f9fafb' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>{t('Areas We Cover')}</p>
-        <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '32px' }}><strong>{t('Popular Locations')}</strong></h2>
-        <div className="gbp-areas-grid">
+        <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>{t('Where We Operate')}</p>
+        <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '8px' }}>
+          {t('Our')} <strong>{t('Locations')}</strong>
+        </h2>
+        <p style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '28px' }}>
+          {t('Click on a location to explore available properties.')}
+        </p>
+        <BaliLocationsMap />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px' }}>
           {locations.map(loc => (
             <a key={loc} href={'/properties?location=' + loc} style={{
-              backgroundColor: 'white', border: '1px solid #e5e7eb', padding: 'clamp(14px, 2vw, 20px) clamp(12px, 2vw, 16px)',
-              textDecoration: 'none', color: 'black', display: 'block'
+              display: 'inline-flex', alignItems: 'center', gap: '5px',
+              backgroundColor: 'white', border: '1px solid #e5e7eb',
+              padding: '6px 14px', textDecoration: 'none', color: '#374151',
+              fontSize: '12px', fontWeight: 500,
             }}>
-              <p style={{ fontWeight: 500, fontSize: 'clamp(12px, 1.5vw, 14px)' }}>{loc}</p>
-              <p style={{ fontSize: '11px', color: '#9ca3af', marginTop: '3px' }}>{t('Bali')}</p>
+              <svg width="8" height="10" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 0C1.79 0 0 1.79 0 4c0 3 4 6 4 6s4-3 4-6c0-2.21-1.79-4-4-4z" fill="#111827"/>
+              </svg>
+              {loc}
             </a>
           ))}
         </div>
