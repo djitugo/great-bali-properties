@@ -216,9 +216,15 @@ export const translations = {
     'Honest Market Valuations': 'Panduan Investasi Terpersonalisasi',
     'Tailored Investment Guidance. Whether for lifestyle or yield, we provide data-driven insights to ensure your property achieves maximum capital appreciation and rental performance.': 'Panduan Investasi yang Disesuaikan. Baik untuk gaya hidup maupun imbal hasil, kami memberikan wawasan berbasis data untuk memastikan propertimu mencapai apresiasi modal dan kinerja rental maksimal.',
     'Ready to Start?': 'Siap Memulai?',
+    'Ready to Invest?': 'Siap Berinvestasi?',
     "Let's find your": 'Ayo temukan',
     'dream property': 'properti impianmu',
+    "Let's secure your next": 'Mari amankan investasi Bali',
+    'Bali investment': 'berikutmu',
     'Our team is available 7 days a week. Reach out on WhatsApp for a free consultation with no obligations.': 'Tim kami tersedia 7 hari seminggu. Hubungi via WhatsApp untuk konsultasi gratis tanpa kewajiban.',
+    'Our expert team is available 7 days a week. Connect with us on WhatsApp for a private consultation and market insights.': 'Tim ahli kami tersedia 7 hari seminggu. Hubungi kami via WhatsApp untuk konsultasi pribadi dan wawasan pasar.',
+    'Contact an Expert': 'Hubungi Pakar',
+    'Explore Listings': 'Jelajahi Properti',
 
     // === GUIDE — SHARED ===
     'The Opportunity': 'Peluangnya',

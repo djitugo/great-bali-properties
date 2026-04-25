@@ -293,22 +293,22 @@ export default function AboutPage() {
           variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
           style={{ maxWidth: '600px', margin: '0 auto' }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: '16px' }}>
-            {t('Ready to Start?')}
+            {t('Ready to Invest?')}
           </motion.p>
           <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 300, marginBottom: '16px', lineHeight: 1.2 }}>
-            {t("Let's find your")}<br /><strong>{t('dream property')}</strong>
+            {t("Let's secure your next")}<br /><strong>{t('Bali investment')}</strong>
           </motion.h2>
           <motion.p variants={fadeUp} style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', marginBottom: '36px', lineHeight: 1.7 }}>
-            {t('Our team is available 7 days a week. Reach out on WhatsApp for a free consultation with no obligations.')}
+            {t('Our expert team is available 7 days a week. Connect with us on WhatsApp for a private consultation and market insights.')}
           </motion.p>
           <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={`https://wa.me/${SITE_WA}`} target="_blank" rel="noopener noreferrer"
               style={{ backgroundColor: 'white', color: 'black', fontSize: '14px', fontWeight: 600, padding: '14px 32px', textDecoration: 'none' }}>
-              {t('WhatsApp Us')}
+              {t('Contact an Expert')}
             </a>
             <a href="/properties"
               style={{ border: '1px solid rgba(255,255,255,0.3)', color: 'white', fontSize: '14px', padding: '14px 32px', textDecoration: 'none' }}>
-              {t('Browse Properties')}
+              {t('Explore Listings')}
             </a>
           </motion.div>
         </motion.div>

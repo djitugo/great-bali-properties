@@ -301,7 +301,7 @@ export default function LegalClient() {
           <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={`https://wa.me/${SITE_WA}`} target="_blank" rel="noopener noreferrer"
               style={{ backgroundColor: 'white', color: 'black', fontSize: '14px', fontWeight: 600, padding: '14px 32px', textDecoration: 'none' }}>
-              {t('WhatsApp Us')}
+              {t('Contact an Expert')}
             </a>
             <a href="/contact" style={{ border: '1px solid rgba(255,255,255,0.3)', color: 'white', fontSize: '14px', padding: '14px 32px', textDecoration: 'none' }}>
               {t('Contact')}
