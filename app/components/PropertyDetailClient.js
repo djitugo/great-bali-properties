@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useT, useLang } from '../lib/i18n'
 import { waLinkFor } from '../lib/site'
+import dynamic from 'next/dynamic'
+
+const PropertyLocationMap = dynamic(() => import('./PropertyLocationMap'), { ssr: false })
 
 const USD_RATE = 0.000062
 
@@ -293,6 +296,9 @@ export default function PropertyDetailClient({ property: p, related }) {
           </div>
         </div>
       </div>
+
+      {/* ── LOCATION MAP ── */}
+      <PropertyLocationMap location={p.location} title={p.title} />
 
       {/* ── OTHER LISTINGS YOU MIGHT LIKE ── */}
       {related && related.length > 0 && (
