@@ -139,17 +139,20 @@ export default function AboutPage() {
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('Our Story')}
             </motion.p>
-            <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 300, marginBottom: '24px', lineHeight: 1.2 }}>
-              {t('Born from a passion')}<br /><strong>{t('for Bali')}</strong>
+            <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 300, marginBottom: '8px', lineHeight: 1.2 }}>
+              {t('Elevating Bali Real Estate:')}
             </motion.h2>
-            <motion.p variants={fadeUp} style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.9, marginBottom: '20px' }}>
-              {t('Great Bali Properties was founded with one simple belief: buying property in Bali should be exciting, not stressful. Too many investors had been burned by confusing legalities, misleading listings, and agents who disappeared after the sale.')}
+            <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 300, marginBottom: '24px', lineHeight: 1.2 }}>
+              <strong>{t('Our Journey and Commitment')}</strong>
+            </motion.h2>
+            <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '2px', color: '#111827', textTransform: 'uppercase', fontWeight: 600, marginBottom: '14px' }}>
+              {t('Our Story: Born from a Passion for Bali')}
             </motion.p>
             <motion.p variants={fadeUp} style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.9, marginBottom: '20px' }}>
-              {t("We set out to build something different — a real estate agency rooted in transparency, local knowledge, and genuine care for our clients. As a proud partner of Great Bali Villas, one of Bali's most respected villa management companies, we bring over a decade of on-the-ground expertise to every transaction.")}
+              {t('Great Bali Properties was founded on a singular, powerful conviction: buying property in Bali should be an inspiring and seamless journey, not a source of stress. Having witnessed many investors struggle with complex legalities, misleading listings, and lack of accountability, we set out to build something fundamentally different.')}
             </motion.p>
             <motion.p variants={fadeUp} style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.9 }}>
-              {t('Today, we serve buyers and investors from across the globe, helping them navigate the Indonesian property market with confidence — from first inquiry to final handover and beyond.')}
+              {t("We established a real estate agency rooted in transparency, profound local knowledge, and a genuine commitment to our clients' success. As a proud partner of Great Bali Villas — one of the island's most respected villa management companies — we bring over a decade of on-the-ground expertise to every transaction. Today, we serve a global community of buyers and investors, helping them navigate the Indonesian property market with absolute confidence — from the first inquiry to the final handover and beyond.")}
             </motion.p>
           </motion.div>
 
