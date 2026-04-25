@@ -77,10 +77,10 @@ export default function AboutPage() {
   ]
 
   const whyItems = [
-    { title: t('Partner of Great Bali Villas'), desc: t('Access to 1,000+ managed villas and a team with 10+ years of on-the-ground Bali experience.') },
+    { title: t('Partner of Great Bali Villas'), desc: t('Strategic partnership with Great Bali Villas, providing a foundation of 10+ years of expertise and access to a vast rental network of 1,000+ villas across Bali.') },
     { title: t('Full Legal Support'), desc: t('In-house legal guidance covering leasehold, freehold, notary processes, and foreign ownership structures.') },
-    { title: t('Post-Purchase Management'), desc: t('We can manage your villa for short-term rentals, long-term leases, or simply keep it in perfect condition for your visits.') },
-    { title: t('Honest Market Valuations'), desc: t('We price properties based on real market data — not inflated numbers designed to maximize our commission.') },
+    { title: t('Post-Purchase Management'), desc: t('Comprehensive management from legal finalization to active rental. We handle 50+ properties directly, overseeing ROI optimization and property registration on global rental platforms.') },
+    { title: t('Honest Market Valuations'), desc: t('Tailored Investment Guidance. Whether for lifestyle or yield, we provide data-driven insights to ensure your property achieves maximum capital appreciation and rental performance.') },
   ]
 
   return (
@@ -257,7 +257,7 @@ export default function AboutPage() {
           style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '64px', alignItems: 'center' }}>
           <div>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
-              {t('Why Choose Us')}
+              {t('Why Partner With Us?')}
             </motion.p>
             <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 300, marginBottom: '32px', lineHeight: 1.2 }}>
               {t('The')} <strong>Great Bali Properties</strong> {t('difference')}
