@@ -198,6 +198,59 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* TRACK RECORD */}
+      <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
+              {t('Our Track Record')}
+            </motion.p>
+            <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 300, marginBottom: '16px', lineHeight: 1.2 }}>
+              {t('Our Proven Track Record')} <strong>{t('in Numbers')}</strong>
+            </motion.h2>
+            <motion.p variants={fadeUp} style={{ fontSize: '14px', color: '#6b7280', lineHeight: 1.8, marginBottom: '48px', maxWidth: '680px' }}>
+              {t('At Great Bali Properties, our scale is your advantage. We combine extensive reach with localized precision to deliver exceptional results.')}
+            </motion.p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0' }}>
+              {[
+                {
+                  num: '10+',
+                  label: t('Years of Local Mastery'),
+                  desc: t("A decade of navigating the evolving Bali landscape. We don't just know the market; we have lived through its cycles, giving us the foresight to identify high-yield opportunities before they go mainstream."),
+                },
+                {
+                  num: '50+',
+                  label: t('Properties Under Direct Management'),
+                  desc: t('Our portfolio of managed assets is a testament to our owners\' trust. By maintaining a focused selection, we ensure each property — from boutique cottages to luxury estates — receives the meticulous care and data-driven optimization needed to outperform the market.'),
+                },
+                {
+                  num: '30+',
+                  label: t('Dedicated Professionals'),
+                  desc: t('Your investment is backed by a powerhouse team of 30+ specialists. From legal experts and marketing strategists to on-the-ground property managers, we provide a 360-degree support system that ensures no detail is overlooked.'),
+                },
+                {
+                  num: '360°',
+                  label: t('End-to-End Excellence'),
+                  desc: t('We bridge the gap between "buying a house" and "owning a successful business." By leveraging our management expertise, we ensure your property remains a high-performing asset with a hotel-standard guest experience.'),
+                },
+              ].map((item, i) => (
+                <motion.div key={item.num} variants={fadeUp}
+                  style={{
+                    borderTop: '2px solid #111827',
+                    borderRight: i % 2 === 0 ? '1px solid #e5e7eb' : 'none',
+                    padding: '32px 32px 32px 0',
+                    paddingLeft: i % 2 === 1 ? '32px' : '0',
+                  }}>
+                  <p style={{ fontSize: 'clamp(36px, 5vw, 52px)', fontWeight: 300, lineHeight: 1, marginBottom: '8px', color: '#111827' }}>{item.num}</p>
+                  <p style={{ fontSize: '15px', fontWeight: 700, marginBottom: '14px', color: '#111827' }}>{item.label}</p>
+                  <p style={{ fontSize: '13px', color: '#6b7280', lineHeight: 1.8 }}>{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
       {/* TEAM */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
