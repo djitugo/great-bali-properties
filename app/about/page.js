@@ -57,22 +57,22 @@ export default function AboutPage() {
 
   const team = [
     {
-      name: 'Aditya Pratama',
-      role: t('Founder & Property Director'),
-      desc: t("Born and raised in Bali, Aditya has spent over a decade navigating the island's real estate market, helping hundreds of investors find and grow their property portfolios."),
-      img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80'
+      name: 'Mei Lin',
+      role: t('Business Development Manager'),
+      desc: t('With a rich background spanning property development and hospitality management across Southeast Asia, Mei Lin is the driving force behind Great Bali Properties\' strategic growth. She excels at identifying emerging market trends, forging high-value partnerships, and expanding our portfolio of investment-ready properties. Her sharp instinct for opportunity and deep regional network make her an invaluable asset for investors seeking the next big move in Bali.'),
+      img: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80'
     },
     {
-      name: 'Sarah Mitchell',
-      role: t('International Sales Manager'),
-      desc: t('With a background in luxury real estate across Asia-Pacific, Sarah specializes in connecting international buyers with the right Bali properties for their lifestyle and investment needs.'),
-      img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80'
+      name: 'Intan',
+      role: t('Finance Manager'),
+      desc: t('Intan brings rigorous financial discipline to every aspect of our operations. Specializing in P&L management, rental yield analysis, and Indonesian tax compliance, she ensures that every property in our portfolio is optimized for maximum profitability. Her detailed financial reporting and transparent investor communications give our clients complete confidence in the performance and integrity of their Bali investments.'),
+      img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80'
     },
     {
-      name: 'Wayan Suartama',
-      role: t('Legal & Notary Liaison'),
-      desc: t('Wayan ensures every transaction is legally sound. His deep understanding of Indonesian property law protects buyers and sellers alike throughout the purchase process.'),
-      img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80'
+      name: 'Puspita',
+      role: t('Sales Manager'),
+      desc: t('Puspita is the expert guide who turns interest into investment. With a deep understanding of what drives ROI in Bali\'s competitive rental market, she assists clients in selecting properties with the strongest performance potential. She oversees seamless onboarding onto global rental platforms including Airbnb, Booking.com, and Agoda, ensuring every new property is positioned for immediate, high-occupancy success from day one.'),
+      img: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=80'
     },
   ]
 
