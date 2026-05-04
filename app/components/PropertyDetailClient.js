@@ -11,7 +11,7 @@ const PropertyLocationMap = dynamic(() => import('./PropertyLocationMap'), { ssr
 const USD_RATE = 0.000062
 
 /* ───────── Inline SVG icon set (no external dep) ───────── */
-const Icon = ({ name, size = 22, color = '#0f766e' }) => {
+const Icon = ({ name, size = 22, color = '#111827' }) => {
   const common = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: color, strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }
   switch (name) {
     case 'tag':       return <svg {...common}><path d="M20.59 13.41 12 22l-9-9V3h10l9.59 9.59a2 2 0 0 1 0 2.82Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
@@ -150,11 +150,11 @@ function SpecCard({ icon, label, value }) {
     }}>
       <div style={{
         width: '42px', height: '42px', borderRadius: '50%',
-        background: 'linear-gradient(135deg,#ecfdf5,#d1fae5)',
+        backgroundColor: '#111827',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         flexShrink: 0,
       }}>
-        <Icon name={icon} size={20} color="#047857" />
+        <Icon name={icon} size={20} color="#ffffff" />
       </div>
       <div style={{ minWidth: 0 }}>
         <p style={{ fontWeight: 700, fontSize: '15px', color: '#111827', lineHeight: 1.2, marginBottom: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{value}</p>
@@ -255,8 +255,8 @@ export default function PropertyDetailClient({ property: p, related }) {
           <div>
             <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '6px' }}>{p.location}, Bali</p>
             <h1 style={{ fontSize: 'clamp(24px, 4vw, 38px)', fontWeight: 300, marginBottom: '10px', lineHeight: 1.2 }}>{p.title}</h1>
-            {details.subtitle && <p style={{ fontSize: '14px', color: '#0f766e', fontWeight: 500, marginBottom: '14px', letterSpacing: '0.3px' }}>{details.subtitle}</p>}
-            <p style={{ fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, marginBottom: '4px', color: '#047857' }}>{formatPriceFull(p.price, currency)}</p>
+            {details.subtitle && <p style={{ fontSize: '14px', color: '#4b5563', fontWeight: 500, marginBottom: '14px', letterSpacing: '0.3px' }}>{details.subtitle}</p>}
+            <p style={{ fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, marginBottom: '4px', color: '#111827' }}>{formatPriceFull(p.price, currency)}</p>
             <p style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '36px' }}>{typeLabel[p.price_type] || p.price_type}</p>
 
             {/* Description */}
@@ -267,10 +267,10 @@ export default function PropertyDetailClient({ property: p, related }) {
 
             {/* Mobile CTA */}
             <div className="mobile-cta" style={{ border: '1px solid #e5e7eb', padding: '20px', marginBottom: '32px' }}>
-              <p style={{ fontWeight: 700, fontSize: '20px', marginBottom: '4px', color: '#047857' }}>{formatPriceFull(p.price, currency)}</p>
+              <p style={{ fontWeight: 700, fontSize: '20px', marginBottom: '4px', color: '#111827' }}>{formatPriceFull(p.price, currency)}</p>
               <p style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '16px' }}>{typeLabel[p.price_type]}</p>
               <a href={waLink} target="_blank" rel="noopener noreferrer"
-                style={{ display: 'block', textAlign: 'center', backgroundColor: '#047857', color: 'white', fontSize: '14px', fontWeight: 600, padding: '13px', textDecoration: 'none', marginBottom: '8px' }}>
+                style={{ display: 'block', textAlign: 'center', backgroundColor: '#111827', color: 'white', fontSize: '14px', fontWeight: 600, padding: '13px', textDecoration: 'none', marginBottom: '8px' }}>
                 {t('WhatsApp Inquiry')}
               </a>
               <a href="/properties"
@@ -283,7 +283,7 @@ export default function PropertyDetailClient({ property: p, related }) {
             {details.key_features && details.key_features.length > 0 && (
               <div style={{ marginBottom: '48px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-                  <Icon name="sparkle" size={22} color="#047857" />
+                  <Icon name="sparkle" size={22} color="#111827" />
                   <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#111827' }}>{t('Key Features & Advantages')}</h2>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
@@ -291,16 +291,16 @@ export default function PropertyDetailClient({ property: p, related }) {
                     <div key={i} style={{
                       display: 'flex', gap: '14px',
                       padding: '20px',
-                      border: '1px solid #ecfdf5',
-                      borderLeft: '3px solid #10b981',
-                      backgroundColor: '#f0fdfa',
+                      border: '1px solid #e5e7eb',
+                      borderLeft: '3px solid #111827',
+                      backgroundColor: '#fafafa',
                     }}>
                       <div style={{ flexShrink: 0, marginTop: '2px' }}>
-                        <Icon name="check" size={20} color="#047857" />
+                        <Icon name="check" size={20} color="#111827" />
                       </div>
                       <div>
-                        <p style={{ fontSize: '14px', fontWeight: 700, marginBottom: '4px', color: '#065f46' }}>{f.title}</p>
-                        <p style={{ fontSize: '13px', color: '#374151', lineHeight: 1.6 }}>{f.text}</p>
+                        <p style={{ fontSize: '14px', fontWeight: 700, marginBottom: '4px', color: '#111827' }}>{f.title}</p>
+                        <p style={{ fontSize: '13px', color: '#4b5563', lineHeight: 1.6 }}>{f.text}</p>
                       </div>
                     </div>
                   ))}
@@ -312,28 +312,28 @@ export default function PropertyDetailClient({ property: p, related }) {
             {details.why_buy && details.why_buy.length > 0 && (
               <div style={{ marginBottom: '48px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-                  <Icon name="star" size={22} color="#b45309" />
+                  <Icon name="star" size={22} color="#111827" />
                   <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#111827' }}>{t('Why You Should Buy This Property')}</h2>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
                   {details.why_buy.map((w, i) => (
                     <div key={i} style={{
                       padding: '24px',
-                      border: '1px solid #fef3c7',
-                      backgroundColor: '#fffbeb',
+                      border: '1px solid #e5e7eb',
+                      backgroundColor: '#ffffff',
                       position: 'relative',
                     }}>
                       <div style={{
                         width: '36px', height: '36px',
                         borderRadius: '50%',
-                        backgroundColor: '#f59e0b',
+                        backgroundColor: '#111827',
                         color: 'white',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontWeight: 700, fontSize: '14px',
                         marginBottom: '14px',
                       }}>{i + 1}</div>
-                      <p style={{ fontSize: '15px', fontWeight: 700, marginBottom: '8px', color: '#78350f' }}>{w.title}</p>
-                      <p style={{ fontSize: '13px', color: '#374151', lineHeight: 1.65 }}>{w.text}</p>
+                      <p style={{ fontSize: '15px', fontWeight: 700, marginBottom: '8px', color: '#111827' }}>{w.title}</p>
+                      <p style={{ fontSize: '13px', color: '#4b5563', lineHeight: 1.65 }}>{w.text}</p>
                     </div>
                   ))}
                 </div>
@@ -344,13 +344,13 @@ export default function PropertyDetailClient({ property: p, related }) {
             {details.investment_structure && details.investment_structure.length > 0 && (
               <div style={{ marginBottom: '48px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-                  <Icon name="shield" size={22} color="#0369a1" />
+                  <Icon name="shield" size={22} color="#111827" />
                   <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#111827' }}>{t('Investment Structure')}</h2>
                 </div>
-                <ul style={{ listStyle: 'none', padding: 0, border: '1px solid #e0f2fe', backgroundColor: '#f0f9ff' }}>
+                <ul style={{ listStyle: 'none', padding: 0, border: '1px solid #e5e7eb', backgroundColor: '#fafafa' }}>
                   {details.investment_structure.map((line, i) => (
-                    <li key={i} style={{ padding: '14px 20px', borderBottom: i < details.investment_structure.length - 1 ? '1px solid #e0f2fe' : 'none', display: 'flex', gap: '12px', alignItems: 'flex-start', fontSize: '14px', color: '#1f2937' }}>
-                      <Icon name="check" size={16} color="#0369a1" />
+                    <li key={i} style={{ padding: '14px 20px', borderBottom: i < details.investment_structure.length - 1 ? '1px solid #e5e7eb' : 'none', display: 'flex', gap: '12px', alignItems: 'flex-start', fontSize: '14px', color: '#1f2937' }}>
+                      <Icon name="check" size={16} color="#111827" />
                       <span>{line}</span>
                     </li>
                   ))}
@@ -362,7 +362,7 @@ export default function PropertyDetailClient({ property: p, related }) {
             {images.length > 1 && (
               <div style={{ marginBottom: '48px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-                  <Icon name="view" size={22} color="#047857" />
+                  <Icon name="view" size={22} color="#111827" />
                   <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#111827' }}>{t('Photo Gallery')}</h2>
                 </div>
 
@@ -393,7 +393,7 @@ export default function PropertyDetailClient({ property: p, related }) {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '8px' }}>
                   {images.map((img, i) => (
                     <div key={i} onClick={() => setGalleryImg(i)}
-                      style={{ cursor: 'pointer', overflow: 'hidden', aspectRatio: '4/3', border: i === galleryImg ? '2px solid #047857' : '2px solid transparent', opacity: i === galleryImg ? 1 : 0.85, transition: 'opacity 0.2s' }}
+                      style={{ cursor: 'pointer', overflow: 'hidden', aspectRatio: '4/3', border: i === galleryImg ? '2px solid #111827' : '2px solid transparent', opacity: i === galleryImg ? 1 : 0.85, transition: 'opacity 0.2s' }}
                       onMouseEnter={e => e.currentTarget.style.opacity = 1}
                       onMouseLeave={e => e.currentTarget.style.opacity = i === galleryImg ? 1 : 0.85}>
                       <img src={img} alt={p.title + ' ' + (i + 1)}
@@ -408,15 +408,15 @@ export default function PropertyDetailClient({ property: p, related }) {
             {details.nearby && details.nearby.length > 0 && (
               <div style={{ marginBottom: '48px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-                  <Icon name="compass" size={22} color="#047857" />
+                  <Icon name="compass" size={22} color="#111827" />
                   <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#111827' }}>{t('Nearby Destinations & Accessibility')}</h2>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '0', border: '1px solid #f3f4f6' }}>
                   {details.nearby.map((n, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 18px', borderBottom: '1px solid #f3f4f6', borderRight: '1px solid #f3f4f6' }}>
-                      <Icon name="pin" size={16} color="#047857" />
+                      <Icon name="pin" size={16} color="#111827" />
                       <div style={{ flex: 1, fontSize: '13px', color: '#374151' }}>{n.name}</div>
-                      <div style={{ fontSize: '13px', color: '#047857', fontWeight: 600 }}>{n.distance}</div>
+                      <div style={{ fontSize: '13px', color: '#111827', fontWeight: 600 }}>{n.distance}</div>
                     </div>
                   ))}
                 </div>
@@ -427,7 +427,7 @@ export default function PropertyDetailClient({ property: p, related }) {
             {details.other_details && Object.keys(details.other_details).length > 0 && (
               <div style={{ marginBottom: '40px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-                  <Icon name="building" size={22} color="#047857" />
+                  <Icon name="building" size={22} color="#111827" />
                   <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#111827' }}>{t('Other Details')}</h2>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '0', border: '1px solid #f3f4f6' }}>
@@ -466,10 +466,10 @@ export default function PropertyDetailClient({ property: p, related }) {
           <div className="desktop-cta" style={{ position: 'sticky', top: '80px', alignSelf: 'start' }}>
             <div style={{ border: '1px solid #e5e7eb', padding: '24px', marginBottom: '16px' }}>
               <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>{t('Interested?')}</p>
-              <p style={{ fontWeight: 700, fontSize: '20px', marginBottom: '4px', color: '#047857', wordBreak: 'break-word' }}>{formatPriceFull(p.price, currency)}</p>
+              <p style={{ fontWeight: 700, fontSize: '20px', marginBottom: '4px', color: '#111827', wordBreak: 'break-word' }}>{formatPriceFull(p.price, currency)}</p>
               <p style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '20px' }}>{typeLabel[p.price_type]}</p>
               <a href={waLink} target="_blank" rel="noopener noreferrer"
-                style={{ display: 'block', textAlign: 'center', backgroundColor: '#047857', color: 'white', fontSize: '14px', fontWeight: 600, padding: '13px', textDecoration: 'none', marginBottom: '10px' }}>
+                style={{ display: 'block', textAlign: 'center', backgroundColor: '#111827', color: 'white', fontSize: '14px', fontWeight: 600, padding: '13px', textDecoration: 'none', marginBottom: '10px' }}>
                 {t('WhatsApp Inquiry')}
               </a>
               <a href="/properties"
