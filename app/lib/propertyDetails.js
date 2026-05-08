@@ -152,6 +152,8 @@ export const PROPERTY_DETAILS = {
     subtitle: 'Prime 2BR Villa in Jimbaran – 20 Mins to Airport & Close to Seafood Beaches',
     map_url: 'https://maps.app.goo.gl/STtNxB471FMVEsbu9',
     address: 'Kompleks Dharman Village, Jl. Nirmala Indah No B4, Jimbaran, Kuta Sel., Badung, Bali 80361',
+    // Hide photos at these DB indices — too zoomed (towel-swan close-ups, branded bath products)
+    skip_image_indices: [3, 4, 8],
 
     key_features: [
       { title: 'Modern Privacy & Comfort', text: 'Features a stylish enclosed living area with direct access to a 3 x 7 m private pool, blending indoor convenience with outdoor relaxation.' },
@@ -225,6 +227,8 @@ export const PROPERTY_DETAILS = {
     subtitle: 'Prime Boutique Workstay Investment | Leasehold 19 Years Remaining | Completion May 2026',
     map_url: 'https://maps.app.goo.gl/tAGDyMzzhsPQCDhM9',
     address: 'Gg. Melati II No.14, Sanur Kauh, Denpasar Selatan, Denpasar, Bali 80228',
+    // Hide photos at these DB indices — duplicate of #2 (same headboard) + lamp close-up
+    skip_image_indices: [3, 8],
 
     key_features: [
       { title: 'Nomad-Centric Design', text: 'Purpose-built for remote workers with ergonomic workspaces and high-speed infrastructure in every suite.' },

@@ -181,11 +181,14 @@ export default function PropertyDetailClient({ property: p, related }) {
     return () => window.removeEventListener('currencyChange', handler)
   }, [])
 
-  const images = p.images ? p.images.split(',').map(s => s.trim()).filter(Boolean) : []
+  const allImages = p.images ? p.images.split(',').map(s => s.trim()).filter(Boolean) : []
   const typeLabel = { leasehold: t('Leasehold'), freehold: t('Freehold'), yearly: t('Yearly Rent') }
   const propertyTypeLabel = { villa: t('Villa'), land: t('Land'), commercial: t('Commercial') }
   const waLink = waLinkFor(p.title, lang, p.whatsapp)
   const details = getPropertyDetails(p.slug) || {}
+  // Filter out photos flagged in propertyDetails (too-zoomed close-ups, duplicates)
+  const skipSet = new Set(details.skip_image_indices || [])
+  const images = allImages.filter((_, i) => !skipSet.has(i))
   const propTypeText = (typeLabel[p.price_type] ? typeLabel[p.price_type] + ' ' : '') + (propertyTypeLabel[p.property_type] || p.property_type || '')
 
   return (
