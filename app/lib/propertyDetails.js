@@ -2,6 +2,54 @@
 // Keyed by property `slug` so each detail page can render full specs,
 // key advantages, and "why you should buy" copy without DB schema changes.
 
+// Curated photo lists (Drive file IDs) — overrides DB `images` when present.
+// Picked from full Drive folders for wider compositions that crop well at hero.
+const driveImg = (id) => `https://lh3.googleusercontent.com/d/${id}=w1600`
+
+const OLIVIA_IMAGES = [
+  '1aXOGqFXFvunk4GX4mqXTcgN0NqYn6chk', // bedroom with art panels
+  '180DU7CUrHYCLuNxWhhgovFJxvPHBHgy0', // bedroom curtain wide
+  '1mFIrjUSCUCzH42OcDxhrxRZxpmX8eOJJ', // bedroom curtain clean
+  '1lI1CwkF7pRNdb63oMLvHAUy_UDidyDUV', // bedroom curtain alt
+  '1NU9pyPWr-xSqrsQipFzTwdm95MHn4-rC', // bedroom with art panels (alt angle)
+  '1GwHa4SjY0qKipz_ccfAntP7cMqy1bWV_', // bedroom with art (alt)
+  '1oFIQ4PsSNbPp480fhrlFFjoLblQvztCn', // pool with plants (wider)
+  '1auieTSHb0wrwoNFFeuJ9cL1sjH0x6vOk', // pool with plants
+  '1Do1oKoSYSXaMUc6AptZJQXU5RiaBzJun', // workspace with mountain wallpaper
+  '1zaXG2c5dxrK3E0PeUkgtxU1P3XJK7lTP', // workspace
+  '1ITO53DvVOHYELa6JlaIknJSYA5xoaTX0', // bathroom (wide)
+  '1p_-_Urn_t1qWLg8ays-jE0WmU7259Zrl', // table
+].map(driveImg)
+
+const BAILE_IMAGES = [
+  '1rFnraGRF1AfxtOq4_olBbJ-VKjikEZwl', // bedroom with chandelier
+  '1kWYWi47J_n3u1c5HNIIEBg4-eE7A46Pb', // bedroom wide
+  '1K2-nOZ12WPMDHiGbOle_j0o-7_hdjKVI', // pool view
+  '1k3jZ9W_36diWdvISh8OzABqL2XVdCJOv', // bedroom variant
+  '1t98oqtQtmCEUuaoCkPpCojikPpcNdhAP', // bedroom angle
+  '1CRdnhFLdBBV7ZaBDcSoSBTirgOeJ7jES', // bedroom with TV
+  '1jVqymzHY-2NfzHQ8VsiaDT6ArrBv53uR', // bedroom chandelier alt
+  '1jztuxOyEMPfadDHJI54xNi16xt4qQnKL', // bedroom alt
+  '1vxHKOHR9SqjYJhPVqZyDLAsqgTOc73dw', // bathroom mirror+sink+shower
+  '1pDtohhCCkkV58h1AJeRC-r8r_nxBOYLX', // bathroom shower
+  '1BRJU3JuuzagKWJw6_qZ1pMgS2wgz5QTk', // bathroom toilet+vanity
+  '1Q2vLuwLOOz2FAranklRXLxnbKgfgwzff', // bathroom mirror sink alt
+].map(driveImg)
+
+const CASA_IMAGES = [
+  '1HrAuN_6cj3k2IwmEcbvS2WQGHh9vxiXs', // bedroom with rose petals
+  '115h4SRkGy0vd5Pr4YBQBh_rP7qM2QFMZ', // wardrobe / closets wide
+  '14ih6hA0Qn29LxPvnxEKAQnRp9XWOil8U', // bedroom side angle
+  '1751e1pcYclLZyHl9H0z99485uWUvXOAR', // bedroom rose petals
+  '1yYv973H0708TZZgWNBevWdeBxsa5YnHP', // bedroom with rug + door
+  '1EteTRIOTvvGcTr3W5g56J_I3vvBMjkUc', // bedroom alt
+  '1NJXy0T7zR2mMPM0dR1DFf3Pmy0JaQUuk', // bedroom open garden door
+  '1MT_NfvAHqyIEVWCxZuRczzOP2TLn8Liz', // pool with mural
+  '1ZLoMp0Gb2jx6JdPZcJPj2GuxpJQq3EUI', // closet
+  '1iZFzB0_RU2WgxqSr2AIMJlPNsNphYB4g', // bedroom rose petals alt
+  '1mkjCQY4KB0QTwJg-G3ecRiGHHnNZnCe6', // outdoor pool wide
+].map(driveImg)
+
 export const PROPERTY_DETAILS = {
   'duality-villas-ubud': {
     villa_id: 'PV001',
@@ -83,6 +131,7 @@ export const PROPERTY_DETAILS = {
     subtitle: 'Modern Sophistication | Tropical Privacy | Unmatched Accessibility',
     map_url: 'https://maps.app.goo.gl/uT4qQ58NzzCkbYNV8',
     address: 'Jl. Tirta Jaya Gg. Dewi Danu No.10, Kerobokan, Kuta Utara, Badung, Bali 80361',
+    images: CASA_IMAGES,
 
     key_features: [
       { title: 'Two Private Suites', text: 'Each bedroom features a spacious ensuite bathroom, a flat-screen TV, and a dedicated workspace—perfect for a modern lifestyle.' },
@@ -152,8 +201,7 @@ export const PROPERTY_DETAILS = {
     subtitle: 'Prime 2BR Villa in Jimbaran – 20 Mins to Airport & Close to Seafood Beaches',
     map_url: 'https://maps.app.goo.gl/STtNxB471FMVEsbu9',
     address: 'Kompleks Dharman Village, Jl. Nirmala Indah No B4, Jimbaran, Kuta Sel., Badung, Bali 80361',
-    // Hide photos at these DB indices — too zoomed (towel-swan close-ups, branded bath products)
-    skip_image_indices: [3, 4, 8],
+    images: BAILE_IMAGES,
 
     key_features: [
       { title: 'Modern Privacy & Comfort', text: 'Features a stylish enclosed living area with direct access to a 3 x 7 m private pool, blending indoor convenience with outdoor relaxation.' },
@@ -227,8 +275,7 @@ export const PROPERTY_DETAILS = {
     subtitle: 'Prime Boutique Workstay Investment | Leasehold 19 Years Remaining | Completion May 2026',
     map_url: 'https://maps.app.goo.gl/tAGDyMzzhsPQCDhM9',
     address: 'Gg. Melati II No.14, Sanur Kauh, Denpasar Selatan, Denpasar, Bali 80228',
-    // Hide photos at these DB indices — duplicate of #2 (same headboard) + lamp close-up
-    skip_image_indices: [3, 8],
+    images: OLIVIA_IMAGES,
 
     key_features: [
       { title: 'Nomad-Centric Design', text: 'Purpose-built for remote workers with ergonomic workspaces and high-speed infrastructure in every suite.' },

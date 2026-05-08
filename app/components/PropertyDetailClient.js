@@ -181,21 +181,23 @@ export default function PropertyDetailClient({ property: p, related }) {
     return () => window.removeEventListener('currencyChange', handler)
   }, [])
 
-  const allImages = p.images ? p.images.split(',').map(s => s.trim()).filter(Boolean) : []
+  const dbImages = p.images ? p.images.split(',').map(s => s.trim()).filter(Boolean) : []
   const typeLabel = { leasehold: t('Leasehold'), freehold: t('Freehold'), yearly: t('Yearly Rent') }
   const propertyTypeLabel = { villa: t('Villa'), land: t('Land'), commercial: t('Commercial') }
   const waLink = waLinkFor(p.title, lang, p.whatsapp)
   const details = getPropertyDetails(p.slug) || {}
-  // Filter out photos flagged in propertyDetails (too-zoomed close-ups, duplicates)
+  // Prefer curated override from propertyDetails, else filter DB images by skip list
   const skipSet = new Set(details.skip_image_indices || [])
-  const images = allImages.filter((_, i) => !skipSet.has(i))
+  const images = (Array.isArray(details.images) && details.images.length > 0)
+    ? details.images
+    : dbImages.filter((_, i) => !skipSet.has(i))
   const propTypeText = (typeLabel[p.price_type] ? typeLabel[p.price_type] + ' ' : '') + (propertyTypeLabel[p.property_type] || p.property_type || '')
 
   return (
     <main style={{ fontFamily: 'Inter, sans-serif', backgroundColor: 'white', color: 'black', minHeight: '100vh', paddingTop: '64px' }}>
 
-      {/* ───────── Hero Slider ───────── */}
-      <div style={{ position: 'relative', height: 'clamp(280px, 55vw, 600px)', overflow: 'hidden', backgroundColor: '#f3f4f6' }}>
+      {/* ───────── Hero Slider — slightly shorter to reduce aggressive 16:9 crop ───────── */}
+      <div style={{ position: 'relative', height: 'clamp(260px, 48vw, 520px)', overflow: 'hidden', backgroundColor: '#f3f4f6' }}>
         <AnimatePresence mode="wait">
           <motion.img
             key={mainImg}
