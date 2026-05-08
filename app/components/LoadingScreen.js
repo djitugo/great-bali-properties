@@ -4,23 +4,19 @@ import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 
 // Loading screen: muncul saat initial load dan saat pindah route.
-// Menampilkan logo heart-house dengan heartbeat pulse. Durasi minimum
-// ~500ms biar transisi terasa halus, tapi tetap fade out begitu konten siap.
+// Logo + thin progress bar yang ngisi sebelum overlay fade out.
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(true)
   const pathname = usePathname()
   const firstLoad = useRef(true)
+  const [duration, setDuration] = useState(700)
 
   useEffect(() => {
-    // Initial mount: tampilin sebentar lalu hide
-    if (firstLoad.current) {
-      firstLoad.current = false
-      const timer = setTimeout(() => setVisible(false), 800)
-      return () => clearTimeout(timer)
-    }
-    // Route change: flash loading singkat
+    const ms = firstLoad.current ? 800 : 500
+    setDuration(ms)
+    firstLoad.current = false
     setVisible(true)
-    const timer = setTimeout(() => setVisible(false), 500)
+    const timer = setTimeout(() => setVisible(false), ms)
     return () => clearTimeout(timer)
   }, [pathname])
 
@@ -32,7 +28,7 @@ export default function LoadingScreen() {
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
+          transition={{ duration: 0.35, ease: 'easeInOut' }}
           style={{
             position: 'fixed',
             inset: 0,
@@ -42,45 +38,51 @@ export default function LoadingScreen() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '20px',
+            gap: '24px',
             pointerEvents: visible ? 'auto' : 'none',
           }}>
-          {/* Heart-house logo with heartbeat pulse */}
-          <img
-            translate="no"
-            src="/logo-icon.svg"
-            alt="Great Bali Properties"
-            width="88"
-            height="88"
-            style={{
-              display: 'block',
-              animation: 'gbp-heartbeat 1.2s ease-in-out infinite',
-              transformOrigin: 'center center',
-            }}
-          />
-
-          {/* Subtle word mark below */}
+          {/* Site logo */}
           <img
             translate="no"
             src="/logo.png"
-            alt=""
-            aria-hidden="true"
+            alt="Great Bali Properties"
             style={{
               display: 'block',
-              height: '20px',
+              height: '52px',
               width: 'auto',
-              opacity: 0.55,
+              maxWidth: '70vw',
             }}
           />
 
+          {/* Thin progress bar */}
+          <div
+            role="progressbar"
+            aria-label="Loading"
+            style={{
+              width: '180px',
+              height: '2px',
+              backgroundColor: '#f3f4f6',
+              overflow: 'hidden',
+              position: 'relative',
+            }}>
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                height: '100%',
+                width: '100%',
+                backgroundColor: 'black',
+                transformOrigin: 'left center',
+                animation: `gbp-progress ${duration}ms ease-out forwards`,
+              }}
+            />
+          </div>
+
           <style>{`
-            @keyframes gbp-heartbeat {
-              0%   { transform: scale(1);    }
-              14%  { transform: scale(1.12); }
-              28%  { transform: scale(1);    }
-              42%  { transform: scale(1.12); }
-              70%  { transform: scale(1);    }
-              100% { transform: scale(1);    }
+            @keyframes gbp-progress {
+              from { transform: scaleX(0); }
+              to   { transform: scaleX(1); }
             }
           `}</style>
         </motion.div>
