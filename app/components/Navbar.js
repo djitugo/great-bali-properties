@@ -116,12 +116,8 @@ export default function Navbar() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '16px' }}>
 
           {/* Site logo — tidak pernah diterjemahkan */}
-          <a href="/" translate="no" aria-label="Great Bali Properties" style={{ textDecoration: 'none', color: 'black', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src="/logo-icon.svg" alt="" width="34" height="34" style={{ display: 'block', color: 'black' }} />
-            <div translate="no" style={{ lineHeight: 1, display: 'flex', flexDirection: 'column' }}>
-              <span translate="no" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 700, fontSize: '20px', color: 'black', letterSpacing: '-0.01em' }}>great</span>
-              <span translate="no" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 600, fontSize: '12px', color: 'black', letterSpacing: '0.01em', marginTop: '2px' }}>baliproperties</span>
-            </div>
+          <a href="/" translate="no" aria-label="Great Bali Properties" style={{ textDecoration: 'none', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+            <img src="/logo.png" alt="Great Bali Properties" style={{ display: 'block', height: '40px', width: 'auto' }} />
           </a>
 
           {/* Search */}

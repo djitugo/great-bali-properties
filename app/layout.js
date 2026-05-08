@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -6,7 +6,6 @@ import LoadingScreen from './components/LoadingScreen'
 import { LangProvider } from './lib/i18n'
 
 const inter = Inter({ subsets: ['latin'] })
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', weight: ['400', '600', '700'] })
 
 const SITE_URL = 'https://greatbaliproperties.com'
 const SITE_NAME = 'Great Bali Properties'
@@ -128,7 +127,7 @@ export default function RootLayout({ children }) {
   }
 
   return (
-    <html lang="en" className={playfair.variable}>
+    <html lang="en">
       <head>
         <script
           type="application/ld+json"
