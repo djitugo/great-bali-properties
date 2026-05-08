@@ -3,9 +3,9 @@ import { useEffect, useState, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 
-// Loading screen sederhana: muncul saat initial load dan saat pindah route.
-// Menampilkan spinning circle + logo. Durasi minimum ~500ms biar transisi terasa halus,
-// tapi tetap fade out begitu konten siap.
+// Loading screen: muncul saat initial load dan saat pindah route.
+// Menampilkan logo heart-house dengan heartbeat pulse. Durasi minimum
+// ~500ms biar transisi terasa halus, tapi tetap fade out begitu konten siap.
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(true)
   const pathname = usePathname()
@@ -15,12 +15,12 @@ export default function LoadingScreen() {
     // Initial mount: tampilin sebentar lalu hide
     if (firstLoad.current) {
       firstLoad.current = false
-      const timer = setTimeout(() => setVisible(false), 650)
+      const timer = setTimeout(() => setVisible(false), 800)
       return () => clearTimeout(timer)
     }
     // Route change: flash loading singkat
     setVisible(true)
-    const timer = setTimeout(() => setVisible(false), 450)
+    const timer = setTimeout(() => setVisible(false), 500)
     return () => clearTimeout(timer)
   }, [pathname])
 
@@ -32,7 +32,7 @@ export default function LoadingScreen() {
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.35, ease: 'easeInOut' }}
+          transition={{ duration: 0.4, ease: 'easeInOut' }}
           style={{
             position: 'fixed',
             inset: 0,
@@ -45,29 +45,42 @@ export default function LoadingScreen() {
             gap: '20px',
             pointerEvents: visible ? 'auto' : 'none',
           }}>
-          {/* Logo / nama site — tidak ikut di-translate */}
-          <div translate="no" style={{ fontWeight: 700, fontSize: '14px', color: 'black', letterSpacing: '0.5px' }}>
-            Great Bali Properties
-          </div>
-
-          {/* Spinning circle */}
-          <div
-            aria-label="Loading"
-            role="status"
+          {/* Heart-house logo with heartbeat pulse */}
+          <img
+            translate="no"
+            src="/logo-icon.svg"
+            alt="Great Bali Properties"
+            width="88"
+            height="88"
             style={{
-              width: '32px',
-              height: '32px',
-              border: '2px solid #e5e7eb',
-              borderTopColor: 'black',
-              borderRadius: '50%',
-              animation: 'gbp-spin 0.8s linear infinite',
+              display: 'block',
+              animation: 'gbp-heartbeat 1.2s ease-in-out infinite',
+              transformOrigin: 'center center',
+            }}
+          />
+
+          {/* Subtle word mark below */}
+          <img
+            translate="no"
+            src="/logo.png"
+            alt=""
+            aria-hidden="true"
+            style={{
+              display: 'block',
+              height: '20px',
+              width: 'auto',
+              opacity: 0.55,
             }}
           />
 
           <style>{`
-            @keyframes gbp-spin {
-              from { transform: rotate(0deg); }
-              to { transform: rotate(360deg); }
+            @keyframes gbp-heartbeat {
+              0%   { transform: scale(1);    }
+              14%  { transform: scale(1.12); }
+              28%  { transform: scale(1);    }
+              42%  { transform: scale(1.12); }
+              70%  { transform: scale(1);    }
+              100% { transform: scale(1);    }
             }
           `}</style>
         </motion.div>
