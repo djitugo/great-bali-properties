@@ -115,10 +115,13 @@ export default function Navbar() {
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '16px' }}>
 
-          {/* Site title — tidak pernah diterjemahkan */}
-          <a href="/" translate="no" style={{ textDecoration: 'none', color: 'black', flexShrink: 0 }}>
-            <div translate="no" style={{ fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>Great Bali Properties</div>
-            <div translate="no" style={{ fontSize: '10px', color: '#9ca3af' }}>by Great Bali Villas</div>
+          {/* Site logo — tidak pernah diterjemahkan */}
+          <a href="/" translate="no" aria-label="Great Bali Properties" style={{ textDecoration: 'none', color: 'black', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <img src="/logo-icon.svg" alt="" width="34" height="34" style={{ display: 'block', color: 'black' }} />
+            <div translate="no" style={{ lineHeight: 1, display: 'flex', flexDirection: 'column' }}>
+              <span translate="no" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 700, fontSize: '20px', color: 'black', letterSpacing: '-0.01em' }}>great</span>
+              <span translate="no" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 600, fontSize: '12px', color: 'black', letterSpacing: '0.01em', marginTop: '2px' }}>baliproperties</span>
+            </div>
           </a>
 
           {/* Search */}

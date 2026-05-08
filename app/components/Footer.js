@@ -38,9 +38,13 @@ export default function Footer() {
         gap: '32px',
       }}>
         <div>
-          <p translate="no" style={{ fontWeight: 700, marginBottom: '8px', fontSize: '15px' }}>
-            Great Bali Properties
-          </p>
+          <div translate="no" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            <img src="/logo-icon.svg" alt="" width="32" height="32" style={{ display: 'block', color: 'black' }} />
+            <div style={{ lineHeight: 1, display: 'flex', flexDirection: 'column' }}>
+              <span translate="no" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 700, fontSize: '18px', color: 'black', letterSpacing: '-0.01em' }}>great</span>
+              <span translate="no" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 600, fontSize: '11px', color: 'black', letterSpacing: '0.01em', marginTop: '2px' }}>baliproperties</span>
+            </div>
+          </div>
           <p style={{ fontSize: '13px', color: '#9ca3af', lineHeight: 1.7 }}>
             {t('Premium villa and land listings across Bali. A proud partner of Great Bali Villas.')}
           </p>

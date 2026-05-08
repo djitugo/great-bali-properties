@@ -70,8 +70,10 @@ export default function PropertiesMap({ properties }) {
         zoomControl: true,
       })
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap © CARTO',
+        subdomains: 'abcd',
+        maxZoom: 19,
       }).addTo(map)
 
       mapInstance.current = map
@@ -104,40 +106,42 @@ export default function PropertiesMap({ properties }) {
 
       const priceLabel = formatPrice(p.price)
 
+      // Wrapper with translate(-50%, -100%) anchors the bubble's bottom-tip
+      // exactly on the lat/lng, regardless of label width. iconSize [0,0]
+      // tells Leaflet to use natural size; the wrapper handles positioning.
       const icon = L.divIcon({
-        html: `
-          <div style="
-            background-color: #000000;
-            color: #ffffff;
-            padding: 5px 10px;
-            font-size: 11px;
-            font-weight: 700;
-            font-family: Inter, sans-serif;
-            white-space: nowrap;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-            cursor: pointer;
-            border-radius: 3px;
-            display: inline-block;
-            line-height: 1.4;
-            position: relative;
-          ">
-            ${priceLabel}
-            <div style="
-              position: absolute;
-              bottom: -5px;
-              left: 50%;
-              transform: translateX(-50%);
-              width: 0;
-              height: 0;
-              border-left: 5px solid transparent;
-              border-right: 5px solid transparent;
-              border-top: 5px solid #000000;
-            "></div>
-          </div>
-        `,
-        className: '',
+        html: `<div class="gbp-price-marker" style="
+          position: absolute;
+          left: 0; top: 0;
+          transform: translate(-50%, -100%);
+          background-color: #111827;
+          color: #ffffff;
+          padding: 5px 10px;
+          font-size: 11px;
+          font-weight: 700;
+          font-family: Inter, sans-serif;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+          cursor: pointer;
+          border-radius: 3px;
+          line-height: 1.4;
+        ">
+          ${priceLabel}
+          <span style="
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #111827;
+          "></span>
+        </div>`,
+        className: 'gbp-price-icon',
         iconAnchor: [0, 0],
-        iconSize: null,
+        iconSize: [0, 0],
       })
 
       const jitter = 0.006
@@ -216,9 +220,12 @@ export default function PropertiesMap({ properties }) {
       </div>
 
       <style>{`
-        .leaflet-div-icon {
+        .leaflet-div-icon, .gbp-price-icon {
           background: transparent !important;
           border: none !important;
+          padding: 0 !important;
+          width: 0 !important;
+          height: 0 !important;
         }
       `}</style>
     </div>

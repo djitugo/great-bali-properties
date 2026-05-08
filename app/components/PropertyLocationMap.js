@@ -46,29 +46,20 @@ export default function PropertyLocationMap({ location, title, mapUrl, address }
         scrollWheelZoom: false,
       })
 
-      // Grayscale tiles to keep the page strictly black & white
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      // Colored map tiles (CARTO Voyager — soft pastel road network)
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '© OpenStreetMap © CARTO',
         subdomains: 'abcd',
         maxZoom: 19,
       }).addTo(map)
 
-      // Black pin with white halo
-      const pinSvg = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="50" viewBox="0 0 38 50">
-          <path d="M19 0C8.507 0 0 8.507 0 19c0 14 19 31 19 31s19-17 19-31C38 8.507 29.493 0 19 0z" fill="#111827" stroke="white" stroke-width="2"/>
-          <circle cx="19" cy="19" r="7" fill="white"/>
-          <circle cx="19" cy="19" r="3" fill="#111827"/>
-        </svg>
-      `
+      // Stable black pin — explicit width/height + display:block on the SVG itself
+      // (no flex wrapper) so iconAnchor stays accurate at every zoom level.
+      const pinSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="50" viewBox="0 0 38 50" style="display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.35));"><path d="M19 0C8.507 0 0 8.507 0 19c0 14 19 31 19 31s19-17 19-31C38 8.507 29.493 0 19 0z" fill="#111827" stroke="white" stroke-width="2"/><circle cx="19" cy="19" r="7" fill="white"/><circle cx="19" cy="19" r="3" fill="#111827"/></svg>`
 
       const icon = L.divIcon({
-        html: `
-          <div style="display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.35));">
-            ${pinSvg}
-          </div>
-        `,
-        className: '',
+        html: pinSvg,
+        className: 'gbp-marker',
         iconAnchor: [19, 50],
         iconSize: [38, 50],
       })
@@ -158,7 +149,8 @@ export default function PropertyLocationMap({ location, title, mapUrl, address }
         </div>
       </div>
       <style>{`
-        .leaflet-div-icon { background: transparent !important; border: none !important; }
+        .leaflet-div-icon { background: transparent !important; border: none !important; padding: 0 !important; }
+        .gbp-marker { width: 38px !important; height: 50px !important; line-height: 0 !important; }
         .gbp-popup .leaflet-popup-content-wrapper {
           border-radius: 4px !important;
           box-shadow: 0 6px 24px rgba(0,0,0,0.15) !important;

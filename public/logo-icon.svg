@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Heart outline -->
+  <path d="M50 87 C 50 87, 8 60, 8 32 C 8 14, 26 6, 50 26 C 74 6, 92 14, 92 32 C 92 60, 50 87, 50 87 Z"/>
+  <!-- House body -->
+  <path d="M34 56 L 34 70 L 66 70 L 66 56"/>
+  <!-- Roof -->
+  <path d="M28 56 L 50 38 L 72 56"/>
+  <!-- Door -->
+  <path d="M44 70 L 44 60 L 56 60 L 56 70"/>
+</svg>

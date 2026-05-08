@@ -44,39 +44,19 @@ export default function BaliLocationsMap() {
         scrollWheelZoom: false,
       })
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '© OpenStreetMap © CARTO',
         subdomains: 'abcd',
         maxZoom: 19,
       }).addTo(map)
 
       LOCATIONS.forEach(loc => {
-        const pinSvg = `
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="26" viewBox="0 0 20 26" fill="none">
-            <path d="M10 0C4.477 0 0 4.477 0 10c0 7.5 10 16 10 16s10-8.5 10-16C20 4.477 15.523 0 10 0z" fill="#111827"/>
-            <circle cx="10" cy="10" r="4" fill="white"/>
-          </svg>
-        `
+        // Wrapper div has explicit width matching iconSize so Leaflet's anchor
+        // calculation stays consistent at every zoom level.
+        const html = `<div class="gbp-loc-marker" style="width:80px;height:42px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;line-height:1;"><div style="background:#111827;color:#fff;font-size:10px;font-weight:600;font-family:Inter,sans-serif;padding:3px 8px;border-radius:2px;white-space:nowrap;letter-spacing:0.5px;box-shadow:0 2px 6px rgba(0,0,0,0.25);margin-bottom:3px;">${loc.name}</div><svg xmlns="http://www.w3.org/2000/svg" width="20" height="26" viewBox="0 0 20 26" fill="none" style="display:block;"><path d="M10 0C4.477 0 0 4.477 0 10c0 7.5 10 16 10 16s10-8.5 10-16C20 4.477 15.523 0 10 0z" fill="#111827"/><circle cx="10" cy="10" r="4" fill="white"/></svg></div>`
         const icon = L.divIcon({
-          html: `
-            <div style="display:flex;flex-direction:column;align-items:center;cursor:pointer;">
-              <div style="
-                background:#111827;
-                color:#fff;
-                font-size:10px;
-                font-weight:600;
-                font-family:Inter,sans-serif;
-                padding:3px 8px;
-                border-radius:2px;
-                white-space:nowrap;
-                letter-spacing:0.5px;
-                box-shadow:0 2px 6px rgba(0,0,0,0.25);
-                margin-bottom:3px;
-              ">${loc.name}</div>
-              ${pinSvg}
-            </div>
-          `,
-          className: '',
+          html,
+          className: 'gbp-loc-icon',
           iconAnchor: [40, 42],
           iconSize: [80, 42],
         })
@@ -104,7 +84,8 @@ export default function BaliLocationsMap() {
     <div style={{ position: 'relative', borderRadius: '2px', overflow: 'hidden', border: '1px solid #e5e7eb' }}>
       <div ref={mapRef} style={{ height: '420px', width: '100%', backgroundColor: '#f3f4f6' }} />
       <style>{`
-        .leaflet-div-icon { background: transparent !important; border: none !important; }
+        .leaflet-div-icon, .gbp-loc-icon { background: transparent !important; border: none !important; padding: 0 !important; }
+        .gbp-loc-icon { width: 80px !important; height: 42px !important; }
         .leaflet-container a { color: inherit !important; }
       `}</style>
     </div>
