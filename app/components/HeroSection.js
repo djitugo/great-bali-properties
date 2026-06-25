@@ -11,7 +11,7 @@ export default function HeroSection() {
       />
       <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.52)', zIndex: 1 }} />
 
-      <div style={{ position: 'relative', zIndex: 2, padding: '120px 24px 80px', textAlign: 'center', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+      <div style={{ position: 'relative', zIndex: 2, padding: '120px 24px 80px', textAlign: 'center', width: '100%' }}>
         <motion.p
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: '20px' }}>

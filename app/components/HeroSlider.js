@@ -47,7 +47,7 @@ export default function HeroSlider() {
         </motion.div>
       </AnimatePresence>
 
-      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 20px', maxWidth: '1000px', width: '100%' }}>
+      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 clamp(20px, 5vw, 48px)', width: '100%' }}>
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           style={{ fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', marginBottom: '20px' }}>

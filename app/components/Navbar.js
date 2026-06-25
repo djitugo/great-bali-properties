@@ -113,7 +113,7 @@ export default function Navbar() {
         boxShadow: scrolled ? '0 1px 8px rgba(0,0,0,0.06)' : 'none',
         transition: 'box-shadow 0.3s'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '16px' }}>
 
           {/* Site logo — tidak pernah diterjemahkan */}
           <a href="/" translate="no" aria-label="Great Bali Properties" style={{ textDecoration: 'none', flexShrink: 0, display: 'flex', alignItems: 'center' }}>

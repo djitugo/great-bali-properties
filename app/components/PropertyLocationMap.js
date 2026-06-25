@@ -105,7 +105,7 @@ export default function PropertyLocationMap({ location, title, mapUrl, address }
 
   return (
     <div style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(40px, 6vw, 72px) clamp(16px, 3vw, 32px)', backgroundColor: '#fafafa' }}>
-      <div style={{ maxWidth: '1500px', margin: '0 auto' }}>
+      <div style={{  }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
           <span style={{ display: 'inline-flex', width: '36px', height: '36px', borderRadius: '50%', backgroundColor: '#111827', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

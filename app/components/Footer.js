@@ -33,7 +33,6 @@ export default function Footer() {
       backgroundColor: 'white',
     }}>
       <div style={{
-        maxWidth: '1100px', margin: '0 auto',
         display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
         gap: '32px',
       }}>

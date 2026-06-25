@@ -174,7 +174,7 @@ export default function ContactClient() {
       </div>
 
       {/* CONTACT METHODS */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
           style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
           {c.methods.map((m, i) => (
@@ -193,7 +193,7 @@ export default function ContactClient() {
 
       {/* FORM */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center' }}>
               {t('Send us a message')}
@@ -267,7 +267,7 @@ export default function ContactClient() {
       </div>
 
       {/* MAP + OFFICE INFO */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
             {t('Find Us')}
@@ -319,7 +319,7 @@ export default function ContactClient() {
 
       {/* FAQ */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('Frequently Asked')}

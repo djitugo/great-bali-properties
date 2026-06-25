@@ -211,7 +211,7 @@ export default function OwnershipClient() {
       </div>
 
       {/* INTRO */}
-      <div style={{ maxWidth: '800px', margin: '0 auto', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)', textAlign: 'center' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)', textAlign: 'center' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
             {t('The Basics')}
@@ -227,7 +227,7 @@ export default function OwnershipClient() {
 
       {/* COMPARISON TABLE */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('Side by Side')}
@@ -254,7 +254,7 @@ export default function OwnershipClient() {
       </div>
 
       {/* 4 STRUCTURES */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
             {t('Ownership Options')}
@@ -297,7 +297,7 @@ export default function OwnershipClient() {
 
       {/* DECISION STEPS */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('Decision Framework')}
@@ -326,7 +326,7 @@ export default function OwnershipClient() {
       </div>
 
       {/* RED FLAGS */}
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#dc2626', textTransform: 'uppercase', marginBottom: '16px', fontWeight: 600 }}>
             {t('Red Flags')}
@@ -348,7 +348,7 @@ export default function OwnershipClient() {
 
       {/* FAQ */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('Common Questions')}

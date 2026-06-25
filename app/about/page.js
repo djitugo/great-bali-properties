@@ -117,7 +117,7 @@ export default function AboutPage() {
 
       {/* STATS */}
       <div style={{ borderBottom: '1px solid #f3f4f6', backgroundColor: 'white' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(40px, 6vw, 64px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(40px, 6vw, 64px) clamp(20px, 5vw, 48px)' }}>
           <motion.div
             variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '32px', textAlign: 'center' }}>
@@ -132,7 +132,7 @@ export default function AboutPage() {
       </div>
 
       {/* OUR STORY */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '64px', alignItems: 'center' }}>
           <motion.div
             variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
@@ -175,7 +175,7 @@ export default function AboutPage() {
 
       {/* OUR VALUES */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
           <motion.div
             variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
@@ -200,7 +200,7 @@ export default function AboutPage() {
 
       {/* TRACK RECORD */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('Our Track Record')}
@@ -252,7 +252,7 @@ export default function AboutPage() {
       </div>
 
       {/* TEAM */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
             {t('The People Behind It')}
@@ -283,7 +283,7 @@ export default function AboutPage() {
 
       {/* LOCATIONS */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('Where We Operate')}
@@ -307,7 +307,7 @@ export default function AboutPage() {
       </div>
 
       {/* WHY GREAT BALI PROPERTIES */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <motion.div
           variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
           style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '64px', alignItems: 'center' }}>

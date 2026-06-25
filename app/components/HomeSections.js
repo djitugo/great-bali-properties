@@ -42,7 +42,7 @@ export function WhyChooseUsSection() {
   ]
 
   return (
-    <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)', maxWidth: '1100px', margin: '0 auto' }}>
+    <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
       <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>{t('Why Choose Us')}</p>
       <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '40px', lineHeight: 1.2 }}>
         {t('The smart way to invest')} <strong>{t('in Bali real estate')}</strong>
@@ -99,7 +99,7 @@ export function PopularLocations() {
   const locations = ['Canggu', 'Seminyak', 'Ubud', 'Jimbaran', 'Uluwatu', 'Sanur', 'Pererenan', 'Kerobokan']
   return (
     <div style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)', backgroundColor: '#f9fafb' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{  }}>
         <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>{t('Where We Operate')}</p>
         <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 300, marginBottom: '8px' }}>
           {t('Our')} <strong>{t('Locations')}</strong>

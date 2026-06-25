@@ -39,7 +39,7 @@ export default async function PropertiesPage({ searchParams }) {
 
       <PropertiesHeader count={properties?.length || 0} sort={sort} />
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(24px, 4vw, 40px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(24px, 4vw, 40px) clamp(20px, 5vw, 48px)' }}>
         <AdvancedSearch />
 
         <div style={{ marginBottom: '32px' }}>

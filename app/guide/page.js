@@ -204,7 +204,7 @@ export default function WhyInvestPage() {
       </div>
 
       {/* INTRO */}
-      <div style={{ maxWidth: '800px', margin: '0 auto', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)', textAlign: 'center' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)', textAlign: 'center' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
             {t('The Opportunity')}
@@ -220,7 +220,7 @@ export default function WhyInvestPage() {
 
       {/* 6 REASONS */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('The Case for Bali')}
@@ -249,7 +249,7 @@ export default function WhyInvestPage() {
       </div>
 
       {/* BEST AREAS */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
             {t('Location Guide')}
@@ -296,7 +296,7 @@ export default function WhyInvestPage() {
 
       {/* BUYING PROCESS */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('How It Works')}
@@ -325,7 +325,7 @@ export default function WhyInvestPage() {
       </div>
 
       {/* FAQ */}
-      <div style={{ maxWidth: '800px', margin: '0 auto', padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px)' }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
             {t('Common Questions')}
@@ -344,7 +344,7 @@ export default function WhyInvestPage() {
 
       {/* RELATED GUIDES */}
       <div style={{ backgroundColor: '#f9fafb', borderTop: '1px solid #f3f4f6' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
+        <div style={{ padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <motion.p variants={fadeUp} style={{ fontSize: '11px', letterSpacing: '3px', color: '#9ca3af', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('Continue Reading')}

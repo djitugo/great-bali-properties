@@ -40,7 +40,7 @@ export default async function Home({ searchParams }) {
 
       {/* FEATURED LISTINGS */}
       <div id="listings" style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 48px)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <div style={{  }}>
           <FeaturedListingsHeader />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
             {properties?.slice(0, 6).map(p => <PropertyCard key={p.slug} property={p} />)}
