@@ -231,7 +231,7 @@ export default function PropertyDetailClient({ property: p, related }) {
 
       {/* ───────── Wide Stats Strip (Prestige-style) ───────── */}
       <div style={{ borderBottom: '1px solid #f1f5f4', backgroundColor: 'white' }}>
-        <div style={{ padding: '0 clamp(16px, 3vw, 32px)' }}>
+        <div style={{ padding: '0 clamp(20px, 5vw, 48px)' }}>
           <div style={{
             display: 'flex', flexWrap: 'wrap',
             border: '1px solid #f1f5f4',
@@ -253,7 +253,7 @@ export default function PropertyDetailClient({ property: p, related }) {
       </div>
 
       {/* ───────── Main Content ───────── */}
-      <div style={{ padding: 'clamp(48px, 5vw, 72px) clamp(16px, 3vw, 32px) clamp(32px, 4vw, 48px)' }}>
+      <div style={{ padding: 'clamp(48px, 5vw, 72px) clamp(20px, 5vw, 48px) clamp(32px, 4vw, 48px)' }}>
         <div className="detail-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '40px' }}>
 
           {/* ── Left column ── */}
@@ -507,7 +507,7 @@ export default function PropertyDetailClient({ property: p, related }) {
 
       {/* ── OTHER LISTINGS YOU MIGHT LIKE ── */}
       {related && related.length > 0 && (
-        <div style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(40px, 6vw, 72px) clamp(16px, 3vw, 32px)', backgroundColor: '#f9fafb' }}>
+        <div style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(40px, 6vw, 72px) clamp(20px, 5vw, 48px)', backgroundColor: '#f9fafb' }}>
           <div style={{  }}>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '12px' }}>

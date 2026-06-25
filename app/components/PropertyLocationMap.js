@@ -104,7 +104,7 @@ export default function PropertyLocationMap({ location, title, mapUrl, address }
   }, [location, title, address])
 
   return (
-    <div style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(40px, 6vw, 72px) clamp(16px, 3vw, 32px)', backgroundColor: '#fafafa' }}>
+    <div style={{ borderTop: '1px solid #f3f4f6', padding: 'clamp(40px, 6vw, 72px) clamp(20px, 5vw, 48px)', backgroundColor: '#fafafa' }}>
       <div style={{  }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
           <span style={{ display: 'inline-flex', width: '36px', height: '36px', borderRadius: '50%', backgroundColor: '#111827', alignItems: 'center', justifyContent: 'center' }}>

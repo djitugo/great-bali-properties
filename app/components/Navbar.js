@@ -113,7 +113,7 @@ export default function Navbar() {
         boxShadow: scrolled ? '0 1px 8px rgba(0,0,0,0.06)' : 'none',
         transition: 'box-shadow 0.3s'
       }}>
-        <div style={{ padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ padding: '0 clamp(20px, 5vw, 48px)', height: '64px', display: 'flex', alignItems: 'center', gap: '16px' }}>
 
           {/* Site logo — tidak pernah diterjemahkan */}
           <a href="/" translate="no" aria-label="Great Bali Properties" style={{ textDecoration: 'none', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
@@ -215,7 +215,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div style={{ backgroundColor: 'white', borderTop: '1px solid #f3f4f6', padding: '16px 24px 32px', maxHeight: '85vh', overflowY: 'auto' }}>
+          <div style={{ backgroundColor: 'white', borderTop: '1px solid #f3f4f6', padding: '16px clamp(20px, 5vw, 48px) 32px', maxHeight: '85vh', overflowY: 'auto' }}>
             <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', marginBottom: '20px' }}>
               <input
                 type="text"
